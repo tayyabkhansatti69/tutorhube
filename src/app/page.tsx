@@ -1,16 +1,18 @@
 "use client";
 
-import SaleFooter from "../layouts/saleSite/footer/sale-footer";
-import SaleHeader from "../layouts/saleSite/header/Sale-header";
-import MainSaleSite from "../sections/salesite";
+// import SaleFooter from "../layouts/saleSite/footer/sale-footer";
+// import SaleHeader from "../layouts/saleSite/header/Sale-header";
+// import MainSaleSite from "../sections/salesite";
+import SignIn from "./(auth)/sign-in/page";
 
 
 export default function Home() {
   return (
     <>
-      <SaleHeader />
-      <MainSaleSite />
-      <SaleFooter/>
+      {/* <SaleHeader /> */}
+      {/* <MainSaleSite /> */}
+      {/* <SaleFooter/> */}
+      <SignIn/>
     </>
   );
 }
