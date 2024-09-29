@@ -10,9 +10,9 @@ export const styles = {
     minHeight: 40,
     borderBottom: "unset",
     borderRadius: 0.75,
-    border: `1px solid ${
-      theme.palette.mode === "dark" ? "transparent" : theme.palette.neutral[200]
-    }`,
+    // border: `1px solid ${
+    //   theme.palette.mode === "dark" ? "transparent" : theme.palette.neutral[200]
+    // }`,
     padding: "5px 7px",
     "& .MuiTabs-flexContainer": {
       gap: 0,

@@ -7,6 +7,8 @@ import InvestmentsIcons from "@/src/assets/icons/left-navbar-icons/investments-i
 import TransactionIcon from "@/src/assets/icons/left-navbar-icons/transaction-icon";
 // import TransactionsIcons from "@/assets/icons/left-navbar-icons/transactions-icons";
 import IconSetting from "@/src/assets/icons/dashboard-main/icon-setting";
+// import IconMassage from "@/src/assets/icons/dashboard-main/Icon-massage";
+import IconChat from "@/src/assets/icons/dashboard-main/icon-chat";
 //==========================================================================================
 // CONST
 export const NavListData = [
@@ -45,7 +47,12 @@ export const NavListData = [
   label:'Exam',
   icon:IconSetting,
   link:'/exam'
-} 
+},
+{
+  label:'message',
+  icon:IconChat,
+  link:'/message'
+}
   
  
 ];
