@@ -31,7 +31,7 @@ function TopNavBar(props: any) {
 
   const title=NavListData.filter(nav => pathname.includes(nav.link))[0]?.label
   return (
-    <Box position={{md:"fixed",xs:"relative"}} boxShadow={1} sx={Styles.mainBoxStyle(leftopen, theme)}>
+    <Box position={{md:"fixed",xs:"static"}} boxShadow={1} sx={Styles.mainBoxStyle(leftopen, theme)}>
       <Grid container>
         <Grid xs={12} item display="flex" alignItems="center" flexWrap={"wrap"}>
           {screenSizeHandler && (
