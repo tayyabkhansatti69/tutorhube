@@ -180,7 +180,7 @@ function LiveClassSection() {
                 <Paper variant="elevation" elevation={2} >
                     <Box px={1} pt={1}>
                         <Typography variant="h5" sx={{ m: 2 }}>Lesson activity </Typography>
-                        <Box maxWidth={'20vw'} px={2} pb={2}>
+                        <Box maxWidth={{xs:'100vw',md:'50vh'}} px={2} pb={2}>
 
                             {fields.map((field, index) => (
                                 <TextField
@@ -199,7 +199,12 @@ function LiveClassSection() {
                                 variant="outlined"
                                 onClick={addNewField}
                                 startIcon={<span>+</span>}
-                            >
+                                sx={{
+                                    fontSize: { xs: '0.75rem', sm: '0.875rem', md: '1rem' },  // Font size based on screen size
+                                    padding: { xs: '6px 12px', sm: '8px 16px', md: '10px 20px' },  // Adjust padding for different screen sizes
+                                    width: { xs: '100%', sm: 'auto' },  // Full width on small screens, auto on larger
+                                  }}
+                                >
                                 Add a new lesson activity
                             </Button>
                         </Box>
