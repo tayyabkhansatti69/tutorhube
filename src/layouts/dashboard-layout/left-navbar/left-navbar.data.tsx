@@ -9,6 +9,7 @@ import TransactionIcon from "@/src/assets/icons/left-navbar-icons/transaction-ic
 import IconSetting from "@/src/assets/icons/dashboard-main/icon-setting";
 // import IconMassage from "@/src/assets/icons/dashboard-main/Icon-massage";
 import IconChat from "@/src/assets/icons/dashboard-main/icon-chat";
+import LiveClassIcon from "@/src/assets/icons/left-navbar-icons/live-class-icons";
 //==========================================================================================
 // CONST
 export const NavListData = [
@@ -36,6 +37,11 @@ export const NavListData = [
     label: "Transaction",
     icon: TransactionIcon,
     link: "/transaction",
+  },
+  {
+    label:'Live Classes',
+    icon:LiveClassIcon,
+    link:'/liveclass'
   },
   {
     label: "Settings",

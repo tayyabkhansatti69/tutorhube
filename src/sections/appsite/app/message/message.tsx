@@ -1,4 +1,4 @@
-import { Box, Button, Divider, Grid2, IconButton, TextField, Typography } from "@mui/material"
+import { Box, Button, Divider, Grid2, IconButton, InputAdornment, Paper, TextField, Typography } from "@mui/material"
 import messagnger1 from "@/src/assets/png/messanger-img.png"
 import contact1 from "@/src/assets/png/contact1.png"
 import contact2 from "@/src/assets/png/contact2.png"
@@ -15,7 +15,8 @@ import Image from "next/image"
 import { CustomTabs } from "@/src/components"
 import { useState } from "react"
 import PhoneIcon from "@/src/assets/icons/chats/phone-icon"
-
+import SendIcon from '@mui/icons-material/Send';
+import AttachFileIcon from '@mui/icons-material/AttachFile';
 import VideoIcon from "@/src/assets/icons/chats/video-icons"
 import ThreeDotsIcon from "@/src/assets/icons/chats/three-dots-"
 // const socket = io('http://localhost:5000'); 
@@ -241,257 +242,266 @@ function MessageSection() {
         },
     ]
 
+
+
     const unReadData = chatsData.filter(item => item.status === "unread");
 
     return (
-        <Grid2 container spacing={2} px={2} pt={7} pb={0} mb={0} >
-            <Grid2 size={{ xs: 12, md: 3 }}>
-                <Box display={'flex'} flexDirection={'row'} alignItems={'center'} justifyContent={'flex-start'} gap={2} >
-                    <Image src={messagnger1} alt={'messagnger1'} width={88.7} height={88.7} />
-                    <Box display={'flex'} flexDirection={'column'} alignItems={'flex-start'} justifyContent={'flex-start'}>
-                        <Typography variant='h6' fontWeight={700}>
-                            Mohamed farag
-                        </Typography>
-                        <Typography variant='body1'>
-                            Student
-                        </Typography>
+        <Grid2 container spacing={2} px={0} pt={3.4} pb={0}>
+            <Grid2 size={{ xs: 12, md: 4,lg:3.5 }}>
+                <Paper variant="elevation" elevation={2} sx={{ p: '10px 10px' }}>
+                    <Box display={'flex'} flexDirection={'row'} alignItems={'center'} justifyContent={'flex-start'} gap={2} pt={1} >
+                        <Image src={messagnger1} alt={'messagnger1'} width={88.7} height={88.7} />
+                        <Box display={'flex'} flexDirection={'column'} alignItems={'flex-start'} justifyContent={'flex-start'}>
+                            <Typography variant='h6' fontWeight={700}>
+                                Mohamed farag
+                            </Typography>
+                            <Typography variant='body1'>
+                                Student
+                            </Typography>
+                        </Box>
                     </Box>
-                </Box>
-                <Divider sx={{ mb: 3, marginTop: 3, border: '1px solid rgba(219, 219, 219, 1)' }} />
-                <Box display={'flex'} flexDirection={'row'} alignItems={'center'} justifyContent={"space-between"}>
-                    <Typography variant="body2" fontWeight={600}>
-                        Contacts
-                    </Typography>
-                    <Typography variant="caption" fontWeight={400}>
-                        View All
-                    </Typography>
-                </Box>
-                <Box
-                    display={'flex'}
-                    justifyContent={'center'}
-                    flexDirection={'row'}
-                    alignItems={'center'}
-                    mt={2}
-                    gap={1}
-                    pb={2}// Add gaps between images
-                    sx={{
-                        maxWidth: '330px',
-                        overflowX: 'auto',
-                        '&::-webkit-scrollbar': {
-                            height: '0px',
-                            width: '10px',
-                            mt: '1rem' // Custom scrollbar height (optional)
-                        },
-                        '&::-webkit-scrollbar-thumb': {
-                            backgroundColor: '#888', // Custom scrollbar color (optional)
-                            borderRadius: '10px',
-                        },
-                    }}
-                >
-                    {contactsData?.map((item) => {
-                        return (
-                            <Image
-                                src={item?.image}
-                                alt={'contacts'}
-                                width={44.4}
-                                height={44.4}
-                                key={item?.id} // Add a key if available
-                            />
-                        );
-                    })}
-                </Box>
-
-                <Divider sx={{ mb: 3, marginTop: 1, border: '1px solid rgba(219, 219, 219, 1)' }} />
-                <Box mt={4} display={'flex'} flexDirection={'column'}>
-                    <Box display={'flex'} flexDirection={'row'} justifyContent={'flex-start'} alignItems={'center'}>
+                    <Divider sx={{ mb: 3, marginTop: 3, border: '1px solid rgba(219, 219, 219, 1)' }} />
+                    <Box display={'flex'} flexDirection={'row'} alignItems={'center'} justifyContent={"space-between"}>
                         <Typography variant="body2" fontWeight={600}>
-                            Chats
+                            Contacts
+                        </Typography>
+                        <Typography variant="caption" fontWeight={400}>
+                            View All
                         </Typography>
                     </Box>
-                    <CustomTabs tabsNameArray={["All", "Urread"]} >
-                        <Box>
-                            <Divider sx={{ mb: 1, width: '100%', marginTop: '-26px', border: '0.92px solid rgba(219, 219, 219, 1)' }} />
+                    <Box
+                        display={'flex'}
+                        justifyContent={'center'}
+                        flexDirection={'row'}
+                        alignItems={'center'}
+                        mt={2}
+                        gap={1}
+                        pb={2}// Add gaps between images
+                        sx={{
+                            maxWidth: '330px',
+                            overflowX: 'auto',
+                            '&::-webkit-scrollbar': {
+                                height: '0px',
+                                width: '10px',
+                                mt: '1rem' // Custom scrollbar height (optional)
+                            },
+                            '&::-webkit-scrollbar-thumb': {
+                                backgroundColor: '#888', // Custom scrollbar color (optional)
+                                borderRadius: '10px',
+                            },
+                        }}
+                    >
+                        {contactsData?.map((item) => {
+                            return (
+                                <Image
+                                    src={item?.image}
+                                    alt={'contacts'}
+                                    width={44.4}
+                                    height={44.4}
+                                    key={item?.id} // Add a key if available
+                                />
+                            );
+                        })}
+                    </Box>
 
-                            <Box display="flex" justifyContent="center" flexDirection="column" alignItems="center" gap={0} sx={{
-                                maxHeight: '400px',
-                                overflowY: 'auto',
-                                '&::-webkit-scrollbar': {
-                                    height: '0px',
-                                    width: '1px',
-                                    ml: '1rem' // Custom scrollbar height (optional)
-                                },
-                                '&::-webkit-scrollbar-thumb': {
-                                    backgroundColor: '#888', // Custom scrollbar color (optional)
-                                    borderRadius: '10px',
-                                },
-                            }}>
-                                {chatsData?.map((item, index) => (
-                                    <>
-                                        <Box
-                                            key={index} // Add a key prop when mapping
-                                            display="flex"
-                                            justifyContent="space-between"
-                                            alignItems="center"
-                                            flexDirection="row"
-                                            width="100%" // Optional: to ensure full-width for alignment
-                                            mb={1} // Optional: margin-bottom for spacing between rows
-                                        >
+                    <Divider sx={{ mb: 3, marginTop: 1, border: '1px solid rgba(219, 219, 219, 1)' }} />
+                    <Box mt={4} display={'flex'} flexDirection={'column'}>
+                        <Box display={'flex'} flexDirection={'row'} justifyContent={'flex-start'} alignItems={'center'}>
+                            <Typography variant="body2" fontWeight={600}>
+                                Chats
+                            </Typography>
+                        </Box>
+                        <CustomTabs tabsNameArray={["All", "Urread"]} >
+                            <Box>
+                                <Divider sx={{ mb: 1, width: '100%', marginTop: '-26px', border: '0.92px solid rgba(219, 219, 219, 1)' }} />
 
-                                            <Box display={'flex'} flexDirection={'row'} alignItems={'center'} justifyContent={'flex-start'} gap={0} >
+                                <Box display="flex" justifyContent="center" flexDirection="column" alignItems="center" gap={0} sx={{
+                                    maxHeight: '400px',
+                                    overflowY: 'auto',
+                                    '&::-webkit-scrollbar': {
+                                        width: '0px',
+                                        height: '0px' // Width of the scrollbar
+                                    },
+                                    '&::-webkit-scrollbar-thumb': {
+                                        backgroundColor: '#888', // Color of the scrollbar thumb
+                                        borderRadius: '10px',
+                                        minHeight: '5px', // Minimum height for the scrollbar thumb
+                                        height: '5px', // Set the height of the scrollbar thumb (make it smaller)
+                                    },
+                                    '&::-webkit-scrollbar-thumb:hover': {
+                                        backgroundColor: '#555', // Change color on hover
+                                    },
 
-                                                <Box display="flex" alignItems="center" position="relative">
-                                                    <Image src={item?.image} alt="chats" width={55.5} height={55.5} />
-                                                    {item?.live && (
-                                                        <IconButton
-                                                            sx={{
-                                                                border: '1.8px solid white',
-                                                                borderRadius: '3.75px',
-                                                                position: 'absolute',
-                                                                bottom: 0,
-                                                                right: 0,
-                                                                width: '14.78px',
-                                                                height: '14.78px',
-                                                                background: 'rgba(50, 105, 211, 1)'
-                                                            }}
-                                                        />
+                                }}>
+                                    {chatsData?.map((item, index) => (
+                                        <>
+                                            <Box
+                                                key={index} // Add a key prop when mapping
+                                                display="flex"
+                                                justifyContent="space-between"
+                                                alignItems="center"
+                                                flexDirection="row"
+                                                width="100%" // Optional: to ensure full-width for alignment
+                                                mb={1} // Optional: margin-bottom for spacing between rows
+                                            >
+
+                                                <Box display={'flex'} flexDirection={'row'} alignItems={'center'} justifyContent={'flex-start'} gap={0} >
+
+                                                    <Box display="flex" alignItems="center" position="relative">
+                                                        <Image src={item?.image} alt="chats" width={55.5} height={55.5} />
+                                                        {item?.live && (
+                                                            <IconButton
+                                                                sx={{
+                                                                    border: '1.8px solid white',
+                                                                    borderRadius: '3.75px',
+                                                                    position: 'absolute',
+                                                                    bottom: 0,
+                                                                    right: 0,
+                                                                    width: '14.78px',
+                                                                    height: '14.78px',
+                                                                    background: 'rgba(50, 105, 211, 1)'
+                                                                }}
+                                                            />
+                                                        )}
+                                                    </Box>
+
+
+                                                    <Box display="flex" flexDirection="column" alignItems="flex-start" justifyContent="flex-start" ml={1}>
+                                                        <Typography variant="body2" fontWeight={700}>
+                                                            {item?.name}
+                                                        </Typography>
+                                                        <Typography variant="caption">
+                                                            {item?.message}
+                                                        </Typography>
+                                                    </Box>
+                                                </Box>
+                                                <Box display="flex" flexDirection="column" alignItems="flex-end" justifyContent="flex-start" ml={2}>
+                                                    <Typography variant="caption" fontWeight={400}>
+                                                        {item?.time}
+                                                    </Typography>
+                                                    {item?.count !== '0' && (
+
+
+                                                        <Box display="flex" justifyContent={'center'} alignItems={'center'} sx={{
+                                                            width: '22.17px',
+                                                            height: '22.17px',
+                                                            borderRadius: '3.75px',
+                                                            background: 'rgba(50, 105, 211, 1)'
+                                                        }}>
+                                                            <Typography variant="caption" color="#FFF">
+                                                                {item?.count}
+                                                            </Typography>
+                                                        </Box>
                                                     )}
                                                 </Box>
 
-
-                                                <Box display="flex" flexDirection="column" alignItems="flex-start" justifyContent="flex-start" ml={1}>
-                                                    <Typography variant="body2" fontWeight={700}>
-                                                        {item?.name}
-                                                    </Typography>
-                                                    <Typography variant="caption">
-                                                        {item?.message}
-                                                    </Typography>
-                                                </Box>
-                                            </Box>
-                                            <Box display="flex" flexDirection="column" alignItems="flex-end" justifyContent="flex-start" ml={2}>
-                                                <Typography variant="caption" fontWeight={400}>
-                                                    {item?.time}
-                                                </Typography>
-                                                {item?.count !== '0' && (
-
-
-                                                    <Box display="flex" justifyContent={'center'} alignItems={'center'} sx={{
-                                                        width: '22.17px',
-                                                        height: '22.17px',
-                                                        borderRadius: '3.75px',
-                                                        background: 'rgba(50, 105, 211, 1)'
-                                                    }}>
-                                                        <Typography variant="caption" color="#FFF">
-                                                            {item?.count}
-                                                        </Typography>
-                                                    </Box>
-                                                )}
                                             </Box>
 
-                                        </Box>
+                                            <Divider sx={{ mb: 1, width: '100%', marginTop: 0, border: '0.92px solid rgba(219, 219, 219, 1)' }} />
+                                        </>
+                                    ))}
+                                </Box>
 
-                                        <Divider sx={{ mb: 1, width: '100%', marginTop: 0, border: '0.92px solid rgba(219, 219, 219, 1)' }} />
-                                    </>
-                                ))}
+
                             </Box>
 
+                            <Box>
+                                <Divider sx={{ mb: 1, width: '100%', marginTop: '-26px', border: '0.92px solid rgba(219, 219, 219, 1)' }} />
 
-                        </Box>
+                                <Box display="flex" justifyContent="center" flexDirection="column" alignItems="center">
+                                    {unReadData?.map((item, index) => (
+                                        <>
 
-                        <Box>
-                            <Divider sx={{ mb: 1, width: '100%', marginTop: '-26px', border: '0.92px solid rgba(219, 219, 219, 1)' }} />
+                                            <Box
 
-                            <Box display="flex" justifyContent="center" flexDirection="column" alignItems="center">
-                                {unReadData?.map((item, index) => (
-                                    <>
+                                                key={index} // Add a key prop when mapping
+                                                display="flex"
+                                                justifyContent="space-between"
+                                                alignItems="center"
+                                                flexDirection="row"
+                                                width="100%" // Optional: to ensure full-width for alignment
+                                                mb={1}
+                                                sx={{
+                                                    maxHeight: '400px',
+                                                    overflowY: 'auto',
+                                                    '&::-webkit-scrollbar': {
+                                                        height: '0px',
+                                                        width: '1px',
+                                                        ml: '1rem' // Custom scrollbar height (optional)
+                                                    },
+                                                    '&::-webkit-scrollbar-thumb': {
+                                                        backgroundColor: '#888', // Custom scrollbar color (optional)
+                                                        borderRadius: '10px',
+                                                    },
+                                                }}
+                                            // Optional: margin-bottom for spacing between rows
+                                            >
+                                                <Box display={'flex'} flexDirection={'row'} alignItems={'center'} justifyContent={'flex-start'} gap={0} >
 
-                                        <Box
+                                                    <Box display="flex" alignItems="center" position="relative">
+                                                        <Image src={item?.image} alt="chats" width={55.5} height={55.5} />
+                                                        {item?.live && (
+                                                            <IconButton
+                                                                sx={{
+                                                                    border: '1.8px solid white',
+                                                                    borderRadius: '3.75px',
+                                                                    position: 'absolute',
+                                                                    bottom: 0,
+                                                                    right: 0,
+                                                                    width: '14.78px',
+                                                                    height: '14.78px',
+                                                                    background: 'rgba(50, 105, 211, 1)'
+                                                                }}
+                                                            />
+                                                        )}
+                                                    </Box>
 
-                                            key={index} // Add a key prop when mapping
-                                            display="flex"
-                                            justifyContent="space-between"
-                                            alignItems="center"
-                                            flexDirection="row"
-                                            width="100%" // Optional: to ensure full-width for alignment
-                                            mb={1}
-                                            sx={{
-                                                maxHeight: '400px',
-                                                overflowY: 'auto',
-                                                '&::-webkit-scrollbar': {
-                                                    height: '0px',
-                                                    width: '1px',
-                                                    ml: '1rem' // Custom scrollbar height (optional)
-                                                },
-                                                '&::-webkit-scrollbar-thumb': {
-                                                    backgroundColor: '#888', // Custom scrollbar color (optional)
-                                                    borderRadius: '10px',
-                                                },
-                                            }}
-                                        // Optional: margin-bottom for spacing between rows
-                                        >
-                                            <Box display={'flex'} flexDirection={'row'} alignItems={'center'} justifyContent={'flex-start'} gap={0} >
 
-                                                <Box display="flex" alignItems="center" position="relative">
-                                                    <Image src={item?.image} alt="chats" width={55.5} height={55.5} />
-                                                    {item?.live && (
-                                                        <IconButton
-                                                            sx={{
-                                                                border: '1.8px solid white',
-                                                                borderRadius: '3.75px',
-                                                                position: 'absolute',
-                                                                bottom: 0,
-                                                                right: 0,
-                                                                width: '14.78px',
-                                                                height: '14.78px',
-                                                                background: 'rgba(50, 105, 211, 1)'
-                                                            }}
-                                                        />
+                                                    <Box display="flex" flexDirection="column" alignItems="flex-start" justifyContent="flex-start" ml={1}>
+                                                        <Typography variant="body2" fontWeight={700}>
+                                                            {item?.name}
+                                                        </Typography>
+                                                        <Typography variant="caption">
+                                                            {item?.message}
+                                                        </Typography>
+                                                    </Box>
+                                                </Box>
+                                                <Box display="flex" flexDirection="column" alignItems="flex-end" justifyContent="flex-start" ml={2}>
+                                                    <Typography variant="caption" fontWeight={400}>
+                                                        {item?.time}
+                                                    </Typography>
+                                                    {item?.count !== '0' && (
+
+
+                                                        <Box display="flex" justifyContent={'center'} alignItems={'center'} sx={{
+                                                            width: '22.17px',
+                                                            height: '22.17px',
+                                                            borderRadius: '3.75px',
+                                                            background: 'rgba(50, 105, 211, 1)'
+                                                        }}>
+                                                            <Typography variant="caption" color="#FFF">
+                                                                {item?.count}
+                                                            </Typography>
+                                                        </Box>
                                                     )}
                                                 </Box>
 
-
-                                                <Box display="flex" flexDirection="column" alignItems="flex-start" justifyContent="flex-start" ml={1}>
-                                                    <Typography variant="body2" fontWeight={700}>
-                                                        {item?.name}
-                                                    </Typography>
-                                                    <Typography variant="caption">
-                                                        {item?.message}
-                                                    </Typography>
-                                                </Box>
                                             </Box>
-                                            <Box display="flex" flexDirection="column" alignItems="flex-end" justifyContent="flex-start" ml={2}>
-                                                <Typography variant="caption" fontWeight={400}>
-                                                    {item?.time}
-                                                </Typography>
-                                                {item?.count !== '0' && (
+                                            <Divider sx={{ mb: 1, width: '100%', marginTop: 0, border: '0.92px solid rgba(219, 219, 219, 1)' }} />
+                                        </>
+                                    ))}
+                                </Box>
 
 
-                                                    <Box display="flex" justifyContent={'center'} alignItems={'center'} sx={{
-                                                        width: '22.17px',
-                                                        height: '22.17px',
-                                                        borderRadius: '3.75px',
-                                                        background: 'rgba(50, 105, 211, 1)'
-                                                    }}>
-                                                        <Typography variant="caption" color="#FFF">
-                                                            {item?.count}
-                                                        </Typography>
-                                                    </Box>
-                                                )}
-                                            </Box>
-
-                                        </Box>
-                                        <Divider sx={{ mb: 1, width: '100%', marginTop: 0, border: '0.92px solid rgba(219, 219, 219, 1)' }} />
-                                    </>
-                                ))}
                             </Box>
 
+                        </CustomTabs>
 
-                        </Box>
-
-                    </CustomTabs>
-
-                </Box>
+                    </Box>
+                </Paper>
             </Grid2>
-            <Grid2 size={{ xs: 12, md: 5 }} ml={6} pt={4}>
+            <Grid2 size={{ xs: 12, md: 5,lg:5 }}  pt={4} >
                 <Box display={'flex'} flexDirection={'row'} alignItems={'center'} justifyContent={'flex-start'} gap={2} >
                     <Image src={messagnger1} alt={'messagnger1'} width={64} height={64} />
                     <Box display={'flex'} flexDirection={'column'} alignItems={'flex-start'} justifyContent={'flex-start'}>
@@ -517,7 +527,7 @@ function MessageSection() {
                 <Divider sx={{ mb: 3, marginTop: 3, border: '1px solid rgba(219, 219, 219, 1)' }} />
                 <Box
                     sx={{
-                        height: '75vh',
+                        height: '85vh',
                         display: 'flex',
                         flexDirection: 'column',
                         justifyContent: 'space-between',
@@ -574,7 +584,7 @@ function MessageSection() {
                             display: 'flex',
                             width: '100%',
                             alignItems: 'baseline',
-                            padding: 2,
+                            padding: 4,
                         }}
                     >
                         <TextField
@@ -583,64 +593,80 @@ function MessageSection() {
                             label="Type your message"
                             value={message}
                             onChange={(e) => setMessage(e.target.value)}
-                            sx={{ marginRight: 2 }}
+                            sx={{ marginRight: 2, background: '#FFF' }}
+                            InputProps={{
+                                endAdornment: (
+                                    <InputAdornment position="end">
+                                        <IconButton
+                                            edge="end"
+                                            aria-label="upload document"
+                                            onClick={() => console.log('Upload clicked')}
+                                        >
+                                            <AttachFileIcon sx={{ transform: 'rotate(45deg)' }} />
+                                        </IconButton>
+                                    </InputAdornment>
+                                ),
+                            }}
+
+
                         />
-                        <Button variant="contained" color="primary">
+                        <Button variant="contained" sx={{ background: "rgba(50, 105, 211, 1)", color: '#FFF' }} endIcon={<SendIcon />}>
                             Send
                         </Button>
                     </Box>
                 </Box>
 
             </Grid2>
-            <Grid2 size={{ xs: 12, md: 3 }}>
-                <Box display={'flex'} flexDirection={'row'} alignItems={'center'} justifyContent={'space-evenly'} pt={2} pb={2} >
-                    <PhoneIcon sx={{width:'44.35px', height:'44.5px'}}/>
-                    <VideoIcon sx={{width:'44.35px', height:'44.5px'}}/>
-                    <ThreeDotsIcon sx={{width:'44.35px', height:'44.5px'}}/>
+            <Grid2 size={{ xs: 12, md: 3 ,lg:3.5 }} >
+                <Paper variant="elevation" elevation={2} sx={{ p: '10px 10px' }}>
+                    <Box display={'flex'} flexDirection={'row'} alignItems={'center'} justifyContent={'space-evenly'} pt={2} pb={2} >
+                        <PhoneIcon sx={{ width: '44.35px', height: '44.5px' }} />
+                        <VideoIcon sx={{ width: '44.35px', height: '44.5px' }} />
+                        <ThreeDotsIcon sx={{ width: '44.35px', height: '44.5px' }} />
 
-                </Box>
+                    </Box>
 
-                <Divider sx={{ mb: 3, marginTop: 3, border: '1px solid rgba(219, 219, 219, 1)' }} />
-                <Box display={'flex'} justifyContent={'space-between'} flexDirection={'row'} alignItems={'center'} mb={2}>
-                    <Typography variant="body1" fontWeight={700}>Shared File</Typography>
-                    <Typography variant="body2" fontWeight={400} color='text?.primary'>View All</Typography>
-                </Box>
+                    <Divider sx={{ mb: 3, marginTop: 3, border: '1px solid rgba(219, 219, 219, 1)' }} />
+                    <Box display={'flex'} justifyContent={'space-between'} flexDirection={'row'} alignItems={'center'} mb={2}>
+                        <Typography variant="body1" fontWeight={700}>Shared File</Typography>
+                        <Typography variant="body2" fontWeight={400} color='text?.primary'>View All</Typography>
+                    </Box>
 
-                <Box display={'flex'} flexDirection={'column'} justifyContent={'flex-start'} alignItems={'flex-start'} >
+                    <Box display={'flex'} flexDirection={'column'} justifyContent={'flex-start'} alignItems={'flex-start'} >
 
-                    {fileData?.map((item: any) => (
-                        <Box key={item?.id} display={'flex'} flexDirection={'row'} alignItems={'flex-start'} justifyContent={'space-between'} gap={1}>
-                            <Image src={item?.image} alt="chat" width={36.96} height={36.96} />
-                            <Box display={'flex'} flexDirection={'column'} justifyContent={'center'} alignItems={'flex-start'} mr={1}>
-                                <Typography variant="body2">{item?.type}</Typography>
-                                <Typography variant="body2">{item?.date}</Typography>
+                        {fileData?.map((item: any) => (
+                            <Box key={item?.id} display={'flex'} flexDirection={'row'} alignItems={'flex-start'} justifyContent={'space-between'} gap={1}>
+                                <Image src={item?.image} alt="chat" width={36.96} height={36.96} />
+                                <Box display={'flex'} flexDirection={'column'} justifyContent={'center'} alignItems={'flex-start'} mr={1}>
+                                    <Typography variant="body2">{item?.type}</Typography>
+                                    <Typography variant="body2">{item?.date}</Typography>
+                                </Box>
+                                <Typography variant="body2" ml={2}>{item?.size}</Typography>
                             </Box>
-                            <Typography variant="body2" ml={2}>{item?.size}</Typography>
-                        </Box>
-                    ))}
-                </Box>
+                        ))}
+                    </Box>
 
 
-                <Divider sx={{ mb: 3, marginTop: 3, border: '1px solid rgba(219, 219, 219, 1)' }} />
-                <Box display={'flex'} justifyContent={'space-between'} flexDirection={'row'} alignItems={'center'} mb={2} mt={4}>
-                    <Typography variant="body1" fontWeight={700}>Shared Link</Typography>
-                    <Typography variant="body2" fontWeight={400} color='text?.primary'>View All</Typography>
-                </Box>
+                    <Divider sx={{ mb: 3, marginTop: 3, border: '1px solid rgba(219, 219, 219, 1)' }} />
+                    <Box display={'flex'} justifyContent={'space-between'} flexDirection={'row'} alignItems={'center'} mb={2} mt={4}>
+                        <Typography variant="body1" fontWeight={700}>Shared Link</Typography>
+                        <Typography variant="body2" fontWeight={400} color='text?.primary'>View All</Typography>
+                    </Box>
 
-                <Box display={'flex'} flexDirection={'column'} justifyContent={'flex-start'} alignItems={'flex-start'}>
+                    <Box display={'flex'} flexDirection={'column'} justifyContent={'flex-start'} alignItems={'flex-start'} pb={10}>
 
-                    {downloadData?.map((item: any) => (
-                        <Box key={item?.id} display={'flex'} flexDirection={'row'} alignItems={'flex-start'} justifyContent={'space-between'} gap={2} >
-                            <Image src={item?.image} alt="chat" width={36.96} height={36.96} />
-                            <Box display={'flex'} flexDirection={'column'} justifyContent={'center'} alignItems={'flex-start'} mr={2}>
-                                <Typography variant="body2">{item?.type}</Typography>
-                                <Typography variant="body2">{item?.date}</Typography>
+                        {downloadData?.map((item: any) => (
+                            <Box key={item?.id} display={'flex'} flexDirection={'row'} alignItems={'flex-start'} justifyContent={'space-between'} gap={2} >
+                                <Image src={item?.image} alt="chat" width={36.96} height={36.96} />
+                                <Box display={'flex'} flexDirection={'column'} justifyContent={'center'} alignItems={'flex-start'} mr={2}>
+                                    <Typography variant="body2">{item?.type}</Typography>
+                                    <Typography variant="body2">{item?.date}</Typography>
+                                </Box>
+                                <Typography variant="body2" ml={2}>{item?.size}</Typography>
                             </Box>
-                            <Typography variant="body2" ml={2}>{item?.size}</Typography>
-                        </Box>
-                    ))}
-                </Box>
-
+                        ))}
+                    </Box>
+                </Paper>
 
             </Grid2>
 
