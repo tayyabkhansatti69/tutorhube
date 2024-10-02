@@ -15,8 +15,14 @@ import {
     Typography
 } from "@mui/material";
 import { useState } from "react";
+
+import { useRouter } from "next/navigation";
 function LiveClassSection() {
     const [fields, setFields] = useState([{ id: 1, value: '' }]);
+const router=useRouter()
+    const handleStartLecture=()=>{
+        router?.push("/liveclass/testclass")
+    }
 
     const addNewField = () => {
         const newField = { id: fields.length + 1, value: '' };
@@ -145,6 +151,7 @@ function LiveClassSection() {
     const dummyData = generateDummyData(2);
     console.log(dummyData);
     return (
+        <>
         <Grid px={2} pt={7} container>
             <Grid xs={12} px={4} item>
                 <Paper variant="elevation" elevation={2}>
@@ -219,7 +226,7 @@ function LiveClassSection() {
                     alignItems={'flex-end'}
                     sx={{ width: '100%', height: '100%' }}
                 >
-                    <Button variant="contained" sx={{ backgroundColor: '#242459', color: '#FFF' }}>
+                    <Button variant="contained" sx={{ backgroundColor: '#242459', color: '#FFF' }} onClick={handleStartLecture}>
                         Start Video Lecture
                     </Button>
                 </Box>
@@ -228,7 +235,7 @@ function LiveClassSection() {
 
         </Grid>
 
-
+        </>
     );
 }
 
