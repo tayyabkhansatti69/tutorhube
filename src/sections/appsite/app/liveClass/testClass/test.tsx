@@ -4,6 +4,7 @@ import Image from "next/image"
 import ZoomIcon from "@/src/assets/icons/live-class/icon-zoom"
 import PhoneClassIcons from "@/src/assets/icons/live-class/icon-phone"
 import CircleIcon from '@mui/icons-material/Circle';
+import { useRouter } from "next/navigation"
 
 function TestClassSection() {
     const activities = [
@@ -16,7 +17,7 @@ function TestClassSection() {
         { title: "Feedback", description: "Correct errors and discuss progress" },
         { title: "Plan the next lessons", description: "Discuss assignment and lesson schedule" },
     ];
-
+const router=useRouter()
     return (
 
         <Grid2 container spacing={2} px={0} pt={4}>
@@ -27,7 +28,7 @@ function TestClassSection() {
                     alignItems={'flex-end'}
                     sx={{ width: '100%', height: '100%' }}
                 >
-                    <Button variant="contained" sx={{ backgroundColor: '#242459', color: '#FFF' }} >
+                    <Button variant="contained" sx={{ backgroundColor: '#242459', color: '#FFF' }} onClick={()=>{router.push('/liveclass/session')}} >
                         Start Video Lecture
                     </Button>
                 </Box>
