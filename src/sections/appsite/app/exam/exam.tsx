@@ -4,12 +4,13 @@ import personMale from "@/src/assets/png/maleperson.jpeg";
 import { CustomTable, CustomTabs, TableHeader } from "@/src/components";
 
 import {
-    Avatar,
-    Box,
-    Checkbox,
-    Grid,
-    Paper,
-    Typography
+  Avatar,
+  Box,
+  Button,
+  Checkbox,
+  Grid,
+  Paper,
+  Typography
 } from "@mui/material";
 function ExamSection() {
   const columns = [
@@ -81,14 +82,14 @@ function ExamSection() {
       header: () => <span>Grade</span>,
       isSortable: false,
     },
-    
+
   ];
   const generateDummyData = (count: number) => {
     const names = ["John Doe", "Jane Smith", "Alice Johnson", "Bob Brown"];
     const courses = ["English", "EILTS", "SAT", "SAT"];
     const startDate = ['junuary 2,2020', 'junuary 2,2020', 'junuary 2,2020', 'junuary 2,2020'];
     const endDate = ["2023-01-01", "2023-02-01", "2023-03-01", "2023-04-01"];
-    const grade = ["2o of 20", "2o of 20",'2o of 20','2o of 20'];
+    const grade = ["2o of 20", "2o of 20", '2o of 20', '2o of 20'];
 
     const getRandomElement = (arr: any) =>
       arr[Math.floor(Math.random() * arr.length)];
@@ -151,7 +152,8 @@ function ExamSection() {
       header: () => <span>Created At</span>,
       isSortable: false,
     },
-    { accessorFn: (row: any) => row.dueDate ?? "-",
+    {
+      accessorFn: (row: any) => row.dueDate ?? "-",
       id: "dueDate",
       cell: (info: any) => info.getValue(),
       header: () => <span>Due Date</span>,
@@ -164,15 +166,15 @@ function ExamSection() {
       header: () => <span>Submited By</span>,
       isSortable: false,
     },
-    
-    
+
+
   ];
   const generateDummyAssignmenrData = (count: number) => {
     const names = ["John Doe", "Jane Smith", "Alice Johnson", "Bob Brown"];
     const createdAt = ["English", "EILTS", "SAT", "SAT"];
     const dueDate = ['junuary 2,2020', 'junuary 2,2020', 'junuary 2,2020', 'junuary 2,2020'];
     const submitedBy = ["2023-01-01", "2023-02-01", "2023-03-01", "2023-04-01"];
-    
+
 
     const getRandomElement = (arr: any) =>
       arr[Math.floor(Math.random() * arr.length)];
@@ -183,7 +185,7 @@ function ExamSection() {
       createdAt: getRandomElement(createdAt),
       dueDate: getRandomElement(dueDate),
       submitedBy: getRandomElement(submitedBy),
-      
+
 
     }));
   };
@@ -236,7 +238,8 @@ function ExamSection() {
       header: () => <span>Start Date</span>,
       isSortable: false,
     },
-    { accessorFn: (row: any) => row.endDate ?? "-",
+    {
+      accessorFn: (row: any) => row.endDate ?? "-",
       id: "endDate",
       cell: (info: any) => info.getValue(),
       header: () => <span>End Date</span>,
@@ -249,15 +252,15 @@ function ExamSection() {
       header: () => <span>Submited By</span>,
       isSortable: false,
     },
-    
-    
+
+
   ];
   const generateDummyExamData = (count: number) => {
     const names = ["John Doe", "Jane Smith", "Alice Johnson", "Bob Brown"];
     const startDate = ["English", "EILTS", "SAT", "SAT"];
     const endDate = ['junuary 2,2020', 'junuary 2,2020', 'junuary 2,2020', 'junuary 2,2020'];
     const submitedBy = ["2023-01-01", "2023-02-01", "2023-03-01", "2023-04-01"];
-    
+
 
     const getRandomElement = (arr: any) =>
       arr[Math.floor(Math.random() * arr.length)];
@@ -268,40 +271,46 @@ function ExamSection() {
       startDate: getRandomElement(startDate),
       endDate: getRandomElement(endDate),
       submitedBy: getRandomElement(submitedBy),
-      
+
 
     }));
   };
 
   // Example usage:
   const dummyData = generateDummyData(10);
-const assignmentData=generateDummyAssignmenrData(10)
-const examData=generateDummyExamData(10)
+  const assignmentData = generateDummyAssignmenrData(10)
+  const examData = generateDummyExamData(10)
   return (
     <Grid px={2} pt={7} container>
       <Grid xs={12} px={4} item>
         <Paper variant="elevation" elevation={2}>
-          <CustomTabs tabsNameArray={["Quiz", "Assignment","Exam"]}>
+          <CustomTabs tabsNameArray={["Quiz", "Assignment", "Exam"]}>
             <Box>
+              <Box display={'flex'} flexDirection={'row'} justifyContent={'flex-end'} flexWrap={'nowrap'} alignItems={'end'} pr={2}>
+
+                <Button variant="contained" sx={{ backgroundColor: '#242459', color: '#FFF' }} >
+                  Create Quiz
+                </Button>
+              </Box>
               <Box px={2} my={1}>
                 <TableHeader
                   tableHeaderData={[
                     {
                       type: 'date',
                       FieldProps: {
-                          name: 'startDate',
-                          label: 'Start Date',
-                          minDateName: 'endDate',
+                        name: 'startDate',
+                        label: 'Start Date',
+                        minDateName: 'endDate',
                       },
-                  },
-                  {
-                    type: 'date',
-                    FieldProps: {
+                    },
+                    {
+                      type: 'date',
+                      FieldProps: {
                         name: 'endDate',
                         label: 'End Date',
                         minDateName: 'endDate',
+                      },
                     },
-                },
                   ]}
                 />
               </Box>
@@ -317,31 +326,39 @@ const examData=generateDummyExamData(10)
               />
             </Box>
             <Box>
-              <Box px={2} my={1}>
+              <Box display={'flex'} flexDirection={'row'} justifyContent={'flex-end'} flexWrap={'nowrap'} alignItems={'end'} pr={2}>
+
+                <Button variant="contained" sx={{ backgroundColor: '#242459', color: '#FFF' }} >
+                  Create Assignment
+                </Button>
+              </Box>
+              <Box px={2} my={1} >
                 <TableHeader
                   gridProps={{ lg: 2.5 }}
                   tableHeaderData={[
                     {
                       type: 'date',
-                      
+
                       FieldProps: {
-                          name: 'startDate',
-                          label: 'Start Date',
-                          minDateName: 'endDate',
-                          
+                        name: 'startDate',
+                        label: 'Start Date',
+                        minDateName: 'endDate',
+
                       },
-                  },
-                  {
-                    type: 'date',
-                    FieldProps: {
+                    },
+                    {
+                      type: 'date',
+                      FieldProps: {
                         name: 'endDate',
                         label: 'End Date',
                         minDateName: 'endDate',
+                      },
                     },
-                },
                   ]}
                 />
+
               </Box>
+
               <CustomTable
                 columns={columnsAssignmenrData}
                 data={assignmentData}
@@ -353,25 +370,31 @@ const examData=generateDummyExamData(10)
               />
             </Box>
             <Box>
+              <Box display={'flex'} flexDirection={'row'} justifyContent={'flex-end'} flexWrap={'nowrap'} alignItems={'end'} pr={2}>
+
+                <Button variant="contained" sx={{ backgroundColor: '#242459', color: '#FFF' }} >
+                  Create Exam
+                </Button>
+              </Box>
               <Box px={2} my={1}>
                 <TableHeader
                   tableHeaderData={[
                     {
                       type: 'date',
                       FieldProps: {
-                          name: 'startDate',
-                          label: 'Start Date',
-                          minDateName: 'endDate',
+                        name: 'startDate',
+                        label: 'Start Date',
+                        minDateName: 'endDate',
                       },
-                  },
-                  {
-                    type: 'date',
-                    FieldProps: {
+                    },
+                    {
+                      type: 'date',
+                      FieldProps: {
                         name: 'endDate',
                         label: 'End Date',
                         minDateName: 'endDate',
+                      },
                     },
-                },
                   ]}
                 />
               </Box>
