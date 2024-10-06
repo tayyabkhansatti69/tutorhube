@@ -319,13 +319,16 @@ const examData=generateDummyExamData(10)
             <Box>
               <Box px={2} my={1}>
                 <TableHeader
+                  gridProps={{ lg: 2.5 }}
                   tableHeaderData={[
                     {
                       type: 'date',
+                      
                       FieldProps: {
                           name: 'startDate',
                           label: 'Start Date',
                           minDateName: 'endDate',
+                          
                       },
                   },
                   {

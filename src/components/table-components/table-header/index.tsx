@@ -3,7 +3,6 @@
 import { useState } from "react";
 import {
   Checkbox,
-  Grid,
   InputAdornment,
   MenuItem,
   TextField,
@@ -12,6 +11,7 @@ import {
   FormControlLabel,
   Chip,
   CircularProgress,
+  Grid2,
 } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -270,15 +270,13 @@ export function TableHeader(props: TableHeaderProps): JSX.Element {
         </Button>
       )}
       {show && (
-        <Grid container gap={2} sx={{ my: 2 }}>
+        <Grid2 container gap={2} sx={{ my: 2 }}>
           {tableHeaderData.map((data: any) => {
             if (data.type === "search") {
               return (
-                <Grid
+                <Grid2
                   key={data.FieldProps.name}
-                  xs={12}
-                  md={3.5}
-                  lg={2}
+                  size={{xs:12,md:4,lg:2}}
                   flexWrap="wrap"
                   justifyContent="center"
                   item
@@ -299,15 +297,13 @@ export function TableHeader(props: TableHeaderProps): JSX.Element {
                       ),
                     }}
                   />
-                </Grid>
+                </Grid2>
               );
             } else if (data.type === "select") {
               return (
-                <Grid
+                <Grid2
                   key={data.FieldProps.name}
-                  xs={12}
-                  md={3.5}
-                  lg={2}
+                  size={{xs:12,md:4,lg:2}}
                   flexWrap="wrap"
                   justifyContent="center"
                   item
@@ -332,15 +328,13 @@ export function TableHeader(props: TableHeaderProps): JSX.Element {
                       </MenuItem>
                     ))}
                   </TextField>
-                </Grid>
+                </Grid2>
               );
             } else if (data.type === "multiselect") {
               return (
-                <Grid
+                <Grid2
                   key={data.FieldProps.name}
-                  xs={12}
-                  md={3.5}
-                  lg={2}
+                  size={{xs:12,md:4,lg:2}}
                   flexWrap="wrap"
                   justifyContent="center"
                   item
@@ -397,15 +391,13 @@ export function TableHeader(props: TableHeaderProps): JSX.Element {
                     )}
                     {...data?.FieldProps}
                   />
-                </Grid>
+                </Grid2>
               );
             } else if (data.type === "asyncMultiselect") {
               return (
-                <Grid
+                <Grid2
                   key={data.FieldProps.name}
-                  xs={12}
-                  md={3.5}
-                  lg={2}
+                  size={{xs:12,md:4,lg:2}}
                   flexWrap="wrap"
                   justifyContent="center"
                   item
@@ -418,15 +410,13 @@ export function TableHeader(props: TableHeaderProps): JSX.Element {
                     onChanged,
                     params
                   )}
-                </Grid>
+                </Grid2>
               );
             } else if (data.type === "date") {
               return (
-                <Grid
+                <Grid2
                   key={data.FieldProps.name}
-                  xs={12}
-                  md={3.5}
-                  lg={2}
+                  size={{xs:12,md:4,lg:3}}
                   flexWrap="wrap"
                   justifyContent="center"
                   item
@@ -457,15 +447,13 @@ export function TableHeader(props: TableHeaderProps): JSX.Element {
                       },
                     }}
                   />
-                </Grid>
+                </Grid2>
               );
             } else if (data.type === "checkbox") {
               return (
-                <Grid
+                <Grid2
                   key={data.FieldProps.name}
-                  xs={12}
-                  md={3.5}
-                  lg={2}
+                  size={{xs:12,md:4,lg:2}}
                   flexWrap="wrap"
                   justifyContent="center"
                   item
@@ -480,16 +468,15 @@ export function TableHeader(props: TableHeaderProps): JSX.Element {
                     }}
                     {...data.FieldProps}
                   />
-                </Grid>
+                </Grid2>
               );
             }
             return null;
           })}
           {showClearFilterButton && (
-            <Grid
-              xs={12}
-              md={3.5}
-              lg={2}
+            <Grid2
+            size={{xs:12,md:4,lg:2}}
+              
               display="flex"
               flexWrap="wrap"
               justifyContent={{ xs: "flex-start", sm: "flex-end" }}
@@ -508,9 +495,9 @@ export function TableHeader(props: TableHeaderProps): JSX.Element {
               >
                 Clear Filters
               </Button>
-            </Grid>
+            </Grid2>
           )}
-        </Grid>
+        </Grid2>
       )}
     </>
   );
