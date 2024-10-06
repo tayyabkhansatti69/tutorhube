@@ -44,11 +44,7 @@ export const NavListData = [
     icon:LiveClassIcon,
     link:'/liveclass'
   },
-  {
-    label: "Settings",
-    icon: IconSetting,
-    link: "/settings",
-  },
+ 
   
 {
   label:'Exam',
@@ -59,7 +55,11 @@ export const NavListData = [
   label:'message',
   icon:IconChat,
   link:'/message'
-}
-  
+},
+{
+  label: "Settings",
+  icon: IconSetting,
+  link: "/settings",
+}, 
  
 ];
