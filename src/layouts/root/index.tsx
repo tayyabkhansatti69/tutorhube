@@ -9,13 +9,13 @@ import type { ReactNode } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import { Theme, ThemeProvider } from "@mui/material/styles";
 
-// import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 
 // redux
 import { Provider as ReduxProvider } from "react-redux";
 import { persistStore } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
-
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 //contexts
 
 
@@ -29,6 +29,7 @@ import { SettingsConsumer, SettingsProvider } from "@/src/context";
 import { createTheme } from "@/src/theme";
 import { AuthInitializer } from "@/src/hoc/with-auth-initializer";
 import { Toaster } from "@/src/components";
+// import { LocalizationProvider } from "@mui/x-date-pickers";
 
 // components
 // import { createTheme, Toaster } from "";
@@ -42,7 +43,7 @@ const SETTINGS_STORAGE_KEY = "app.settings";
 const resetSettings = (): void => {
   try {
     Cookies.remove(SETTINGS_STORAGE_KEY);
-    // window.location.reload();
+     window.location.reload();
   } catch (err) {
     console.error(err);
   }
@@ -51,7 +52,7 @@ const resetSettings = (): void => {
 const updateSettings = (settings:any ): void => {
   try {
     Cookies.set(SETTINGS_STORAGE_KEY, JSON.stringify(settings));
-    // window.location.reload();
+    window.location.reload();
   } catch (err) {
     console.error(err);
   }
@@ -73,7 +74,7 @@ export function RootLayout(props: LayoutProps): JSX.Element {
     <NextAppDirEmotionCacheProvider options={{ key: "css" }}>
     <ReduxProvider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        {/* <LocalizationProvider dateAdapter={AdapterDateFns}> */}
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
           <SettingsProvider
             onReset={resetSettings}
             onUpdate={updateSettings}
@@ -102,7 +103,7 @@ export function RootLayout(props: LayoutProps): JSX.Element {
               }}
             </SettingsConsumer>
           </SettingsProvider>
-        {/* </LocalizationProvider> */}
+        </LocalizationProvider>
       </PersistGate>
     </ReduxProvider>
   </NextAppDirEmotionCacheProvider>
