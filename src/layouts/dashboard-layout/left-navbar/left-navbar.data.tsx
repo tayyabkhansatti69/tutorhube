@@ -11,6 +11,8 @@ import IconSetting from "@/src/assets/icons/dashboard-main/icon-setting";
 import IconChat from "@/src/assets/icons/dashboard-main/icon-chat";
 import LiveClassIcon from "@/src/assets/icons/left-navbar-icons/live-class-icons";
 import IconExam from "@/src/assets/icons/dashboard-main/icon-exam";
+import IconQuestionBank from "@/src/assets/icons/dashboard-main/icon-question-bank";
+import IconCourses from "@/src/assets/icons/dashboard-main/icon-courses";
 //==========================================================================================
 // CONST
 export const NavListData = [
@@ -29,6 +31,11 @@ export const NavListData = [
     icon: InvestmentsIcons,
     link: "/students",
   },
+  {
+    label: "Courses",
+    icon: IconCourses,
+    link: "/courses",
+  }, 
   {
     label: "Resources",
     icon: CreditCardsIcons,
@@ -55,6 +62,11 @@ export const NavListData = [
   icon:IconChat,
   link:'/message'
 },
+{
+  label: "Question bank",
+  icon: IconQuestionBank,
+  link: "/questionbank",
+}, 
 {
   label: "Settings",
   icon: IconSetting,
