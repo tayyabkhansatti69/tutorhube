@@ -1,8 +1,8 @@
-import { useEffect } from 'react';
+import ClearIcon from '@mui/icons-material/Clear';
 import { CustomModal } from "@/src/components";
-import { FormProvider, RHFTextField } from "@/src/components/rhf";
+import { FormProvider, RHFAutocompleteSync, RHFCheckbox, RHFTextField } from "@/src/components/rhf";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Box, Button, Grid2 } from "@mui/material";
+import { Box, Button, Grid2, IconButton, } from "@mui/material";
 import { useFieldArray, useForm } from "react-hook-form";
 import * as Yup from 'yup';
 
@@ -19,7 +19,11 @@ function ChooseCorrectAnswer(props: any) {
     const FormSchema = Yup.object().shape({
         question: Yup.string().required('Question is required'),
         description: Yup.string().required('Description is required'),
-        options: Yup.array().of(Yup.string().required('Option is required')).min(4, 'At least 4 options are required'),
+        options: Yup.array().of(
+            Yup.object().shape({
+                option: Yup.string().required("option is required").min(2, 'At least 2 options are required').max(8, 'At least 2 options are required'),
+            })
+        ),
     });
 
     // Initialize the form with validation schema
@@ -28,7 +32,7 @@ function ChooseCorrectAnswer(props: any) {
         defaultValues: {
             question: '',
             description: '',
-            options: []  // Do not set initial options here
+            options: [{ option: "" }], // Do not set initial options here
         },
     });
 
@@ -38,16 +42,6 @@ function ChooseCorrectAnswer(props: any) {
         control,
         name: "options",  // Specify the field array name as part of the defined interface
     });
-
-    // Initialize with 4 empty options on component mount
-    useEffect(() => {
-        if (fields.length === 0) {
-            // Append 4 options if none exist
-            for (let i = 0; i < 4; i++) {
-                append('');
-            }
-        }
-    }, [append, fields.length]);
 
     const onSubmit = (data: FormValues) => {
         console.log("Form Data: ", data);
@@ -60,45 +54,82 @@ function ChooseCorrectAnswer(props: any) {
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
             headerLabel={questionTypeEnter?.[0]?.name}
+            headerTypographyProps={{ color: '#FFFFFF' }}
             closeButtonProps={{ onClick: () => setOpenChooseAnswer(false) }}
+            headerMic={true}
+
+            headerMicProps={{}}
+            headerAttachment={true}
+            headerAttachmentProps={{}}
+            headerDuplicate={true}
+            headerDuplicateProps={{}}
+            headerDelete={true}
+            headerDeleteProps={{}}
+            headerIconProp={true}
             rootSx={{
-                maxWidth: 600,
-                maxHeight: 600, // Set a maximum height for the modal
-                overflowY: 'auto',
-                
+                maxWidth: { md: 800, xs: 550, sm: 650 },
+                height: "90%",
+                overflow: "scroll",
+                "::-webkit-scrollbar": {
+                    width: "0px",
+                },
             }}
         >
+
             <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
                 <Grid2 container spacing={2} padding={'16px'}>
+                <Grid2 size={{ xs: 12, md: 6 }}></Grid2>
+                        <Grid2 size={{ xs: 12, md: 4 }}>
+                            <RHFAutocompleteSync
+                                name="type"
+                                placeholder="Choose Type"
+                                size="small"
+                                options={[
+                                    { id: 1, name: "Hard", value: "hard" },
+                                    { id: 2, name: "Easy", value: "easy" },
+                                    { id: 3, name: "Intermediate", value: "intermediate" },
+                                    { id: 4, name: "true False", value: "trueFalse" }
+                                ]}
+                            />
+                        </Grid2>
+                        <Grid2 size={{ xs: 12,md:2, }} >
+                            <RHFTextField name='marks' size="small" label='Marks' fullWidth placeholder='0' />
+                        </Grid2>
+                    
                     <Grid2 size={{ xs: 12 }}>
                         <RHFTextField name="question" fullWidth label="Question" placeholder="Enter The Question" />
                     </Grid2>
                     <Grid2 size={{ xs: 12 }}>
                         <RHFTextField name="description" fullWidth label="Description" placeholder="Enter The Description" multiline rows={3} />
                     </Grid2>
+                    {/* <Grid2 size={{ xs: 12 }} rowSpacing={2}> */}
+                    {fields.map((item, index) => (
+                        <Box key={item?.id} display="flex" alignItems="center" width={'100%'} mt={1} mb={1}>
+                            <Box width={'80%'}>
+                                <RHFTextField
+                                    name={`options.${index}.option`}
+                                    label={`Option ${String.fromCharCode(65 + index)}`}
+                                    fullWidth
+                                    size="small"
+                                    placeholder={`Enter option ${String.fromCharCode(65 + index)}`}
+                                    sx={{ flex: 1 }}
 
-                    <Grid2 size={{ xs: 12 }}>
-                        {fields.map((item, index) => (
-                            <Box key={item.id} display={'flex'} alignItems="center" mb={1} mt={1}>
-                                <Grid2 size={{ xs: fields.length > 4 && index >= 4 ? 12 : 12 }}>
-                                    <RHFTextField
-                                        name={`options.${index}`}
-                                        label={`Option ${String.fromCharCode(65 + index)}`} // A, B, C, D, etc.
-                                        fullWidth
-                                        size="small"
-                                        placeholder={`Enter option ${String.fromCharCode(65 + index)}`}
-                                    />
-                                </Grid2>
-                                {fields.length > 4 && (
-                                    <Grid2 size={{ xs: 2 }}>
-                                        <Button type="button" onClick={() => remove(index)}>
-                                            Delete
-                                        </Button>
-                                    </Grid2>
-                                )}
+                                />
                             </Box>
-                        ))}
-                    </Grid2>
+                            {fields.length > 1 && (
+                                <Box display="flex" alignItems="center" ml={2}>
+                                    <RHFCheckbox name={`selectedOption.${index}`} sx={{ ml: 1 }} />
+                                    <IconButton type="button" onClick={() => remove(index)}>
+                                        <ClearIcon />
+                                    </IconButton>
+                                </Box>
+                            )}
+                        </Box>
+
+
+                    ))}
+                    {/* </Grid2> */}
+
 
                     <Grid2 size={{ xs: 12 }} display="flex" justifyContent="flex-start">
                         <Button

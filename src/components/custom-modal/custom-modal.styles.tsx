@@ -8,7 +8,7 @@ export const Style = {
     bgcolor: "background.paper",
     boxShadow: 24,
     borderRadius: 1.5,
-    p: 2,
+    // padding: '0px 20px 20px 20px',
     ...rootsx,
   }),
 };
