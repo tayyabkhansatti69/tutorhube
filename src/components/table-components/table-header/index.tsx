@@ -276,7 +276,7 @@ export function TableHeader(props: TableHeaderProps): JSX.Element {
               return (
                 <Grid2
                   key={data.FieldProps.name}
-                  size={{xs:12,md:4,lg:2}}
+                  size={{xs:12,md:4,lg:3}}
                   flexWrap="wrap"
                   justifyContent="center"
                   item
