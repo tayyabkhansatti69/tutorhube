@@ -14,14 +14,33 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { signInFormSchema } from "./sign-in.schema";
 import { FormProvider, RHFCheckbox, RHFTextField } from "@/src/components/rhf";
+import { setLocalStorage } from "@/src/utils";
+import { useRouter } from "next/navigation";
 
 function SignInForm() {
+  const router=useRouter()
   const methods = useForm({
     defaultValues: {},
     resolver: yupResolver(signInFormSchema),
   });
   const { handleSubmit } = methods;
-  const onSubmit = () => {};
+  const onSubmit = (data:any) => {
+    setLocalStorage('rememberMe',data)
+    if(data?.email==="teacher@gmail.com"&& data?.password==='123')
+    {
+      router.push("/dashboard");
+    }else if(data?.email==="student@gmail.com"&& data?.password==='123')
+    {
+    router.push("/dashboard");
+    }else if(data?.email==="admine@gmail.com"&& data?.password==='123')
+      {
+      router.push("/dashboard");
+      }else
+      {
+        null
+      }
+
+  };
   return (
     <Box px={4} mt={4}>
       <Stack spacing={1} direction="column" mb={1}>

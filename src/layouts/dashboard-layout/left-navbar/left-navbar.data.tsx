@@ -35,7 +35,7 @@ export const NavListData = [
     label: "Courses",
     icon: IconCourses,
     link: "/courses",
-  }, 
+  },
   {
     label: "Resources",
     icon: CreditCardsIcons,
@@ -47,30 +47,96 @@ export const NavListData = [
     link: "/transaction",
   },
   {
-    label:'Live Classes',
-    icon:LiveClassIcon,
-    link:'/liveclass'
+    label: 'Live Classes',
+    icon: LiveClassIcon,
+    link: '/liveclass'
   },
 
+  {
+    label: 'Exam',
+    icon: IconExam,
+    link: '/exam'
+  },
+  {
+    label: 'message',
+    icon: IconChat,
+    link: '/message'
+  },
+  {
+    label: "Question bank",
+    icon: IconQuestionBank,
+    link: "/questionbank",
+  },
+  {
+    label: "Settings",
+    icon: IconSetting,
+    link: "/settings",
+  },
+
+];
+export const NavListDataStudent = [
+  {
+    label: "Dashboard",
+    icon: HomeIcons,
+    link: "/dashboard",
+  },
+  {
+    label: "My Lesson",
+    icon: AccountsIcons,
+    link: "/schedule",
+  },
+  {
+    label: "Schedule",
+    icon: AccountsIcons,
+    link: "/schedule",
+  },
+  {
+    label: 'message',
+    icon: IconChat,
+    link: '/message'
+  },
+  {
+    label: "Settings",
+    icon: IconSetting,
+    link: "/settings",
+  },
+
+];
+export const NavListDataAdmine = [
+  {
+    label: "Dashboard",
+    icon: HomeIcons,
+    link: "/dashboard",
+  },
+  {
+    label: "User Managment",
+    icon: HomeIcons,
+    link: "/dashboard",
+  },
+  {
+    label: "Transaction",
+    icon: TransactionIcon,
+    link: "/transaction",
+  },
+  {
+    label: "Question bank",
+    icon: IconQuestionBank,
+    link: "/questionbank",
+  },
+  {
+    label: "Schedule",
+    icon: AccountsIcons,
+    link: "/schedule",
+  },
+  {
+    label: "Notification",
+    icon: InvestmentsIcons,
+    link: "/students",
+  },
 {
-  label:'Exam',
-  icon:IconExam,
-  link:'/exam'
-},
-{
-  label:'message',
-  icon:IconChat,
-  link:'/message'
-},
-{
-  label: "Question bank",
-  icon: IconQuestionBank,
-  link: "/questionbank",
-}, 
-{
-  label: "Settings",
-  icon: IconSetting,
-  link: "/settings",
-}, 
- 
+    label: "Settings",
+    icon: IconSetting,
+    link: "/settings",
+  },
+
 ];

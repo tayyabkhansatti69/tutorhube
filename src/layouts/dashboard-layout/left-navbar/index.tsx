@@ -3,7 +3,7 @@ import React from "react";
 import { styled, Theme, CSSObject, useTheme } from "@mui/material/styles";
 import MuiDrawer from "@mui/material/Drawer";
 import NavbarList from "./navbar-list";
-import { NavListData } from "./left-navbar.data";
+import { NavListData, NavListDataAdmine, NavListDataStudent } from "./left-navbar.data";
 //icons
 import MenuIcon from "@mui/icons-material/Menu";
 // import LogoIcon from "@/assets/icons/logo-icon";
@@ -11,6 +11,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 // import Image from "next/image";
 // import IconLeftNavbar from "@/assets/icons/dashboard-main/Icon-leftnavbar";
 import IconLeftNavbar from "@/src/assets/icons/dashboard-main/Icon-leftnavbar";
+import { getLocalStorage } from "@/src/utils";
 // import { usePathname } from "next/navigation";
 //=====================================================================================
 // CONSTANTS
@@ -21,6 +22,11 @@ function LeftNavbar(props: any) {
   const theme: any = useTheme();
   const { open, handleDrawer,setLinkName } = props;
   const screenSizeHandler = useMediaQuery(theme.breakpoints.down("md"));
+
+console.log(getLocalStorage('rememberMe'),"remn")
+const loginUser:any=getLocalStorage('rememberMe')
+console.log(loginUser?.email,loginUser?.password ,"datata")
+
   return (
     <Drawer variant="permanent" open={open}>
       <Box sx={{ maxHeight: "100vh" }}>
@@ -40,7 +46,25 @@ function LeftNavbar(props: any) {
 
         {/* Left NavBar List Component  */}
         <Stack flexDirection={"column"} gap={1} mt={5} pr={2}>
-          {NavListData.map(({ label, icon, link }, index) => (
+          {loginUser?.email==='teacher@gmail.com' && loginUser.password==='123' && NavListData.map(({ label, icon, link }, index) => (
+            <NavbarList
+              key={index}
+              link={link}
+              Icon={icon}
+              label={label}
+              setLinkName={setLinkName}
+            />
+          ))}
+          {loginUser?.email==='student@gmail.com' && loginUser.password==='123' && NavListDataStudent.map(({ label, icon, link }, index) => (
+            <NavbarList
+              key={index}
+              link={link}
+              Icon={icon}
+              label={label}
+              setLinkName={setLinkName}
+            />
+          ))}
+           {loginUser?.email==='admine@gmail.com' && loginUser.password==='123' && NavListDataAdmine.map(({ label, icon, link }, index) => (
             <NavbarList
               key={index}
               link={link}
