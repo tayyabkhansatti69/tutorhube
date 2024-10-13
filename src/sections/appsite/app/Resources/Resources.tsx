@@ -6,10 +6,10 @@ import {
   Paper,
   Stack,
   Typography,
-  TextField,
-  InputAdornment,
-  Button,
   IconButton,
+  Menu,
+  MenuItem,
+  Button,
 } from "@mui/material";
 import React from "react";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
@@ -26,50 +26,53 @@ import IconLecture23 from "@/src/assets/icons/resource/IconLecture23";
 import IconFile3 from "@/src/assets/icons/resource/IconFile3";
 import IconLectureContant from "@/src/assets/icons/resource/IconLectureContant";
 import IconDataStock from "@/src/assets/icons/resource/IconDataStock";
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import AddResources from "./addresource";
+import { useRouter } from "next/navigation";
 
 function ResourcesSection() {
   const data = [
     {
       header: "Grammar",
       HeadIcon: IconGrammar,
-      headIconBgColor:"#E4F8FFE5",
+      headIconBgColor: "#E4F8FFE5",
       subtitle: "Present Sample",
-      SubtitleIcon:IconPresentSample,
+      SubtitleIcon: IconPresentSample,
     },
     {
       header: "Listening",
       HeadIcon: IconListening,
-      headIconBgColor:"#EBEBFF",
+      headIconBgColor: "#EBEBFF",
       subtitle: "Audio 24",
-      SubtitleIcon:IconAudio24,
+      SubtitleIcon: IconAudio24,
     },
     {
       header: "Speaking",
       HeadIcon: IconSpeaking,
-      headIconBgColor:"#D0E0FF",
+      headIconBgColor: "#D0E0FF",
       subtitle: "Lecture 23",
-      SubtitleIcon:IconLecture23,
+      SubtitleIcon: IconLecture23,
     },
     {
       header: "Reading",
       HeadIcon: IconReading,
-      headIconBgColor:"#E1F7E3",
+      headIconBgColor: "#E1F7E3",
       subtitle: "File 3",
-      SubtitleIcon:IconFile3,
+      SubtitleIcon: IconFile3,
     },
     {
       header: "Writing",
       HeadIcon: IconWriting,
-      headIconBgColor:"#D1FAE5",
+      headIconBgColor: "#D1FAE5",
       subtitle: "Lecture Content",
-      SubtitleIcon:IconLectureContant,
+      SubtitleIcon: IconLectureContant,
     },
     {
       header: "Other Skills",
       HeadIcon: IconOtherSkills,
-      headIconBgColor:"#FEF3C7",
+      headIconBgColor: "#FEF3C7",
       subtitle: "Data stock",
-      SubtitleIcon:IconDataStock,
+      SubtitleIcon: IconDataStock,
     },
   ];
   return (
@@ -77,6 +80,15 @@ function ResourcesSection() {
       {data.map((item) => (
         <Card key={item.header} {...item} />
       ))}
+      <Grid item xs={12} display="flex" flexDirection={'row'} alignItems={'flex-end'} justifyContent={'flex-end'}>
+        <Box >
+          <Button variant="contained" sx={{ background: '#2F2D82', color: 'white' }}>
+            Create Card
+          </Button>
+
+
+        </Box>
+      </Grid>
     </Grid>
   );
 }
@@ -88,84 +100,105 @@ const Card = ({
   subtitle,
   HeadIcon,
   headIconBgColor,
-  SubtitleIcon
+
 }: any) => {
+
+const router=useRouter()
+  const [openChooseAnswer, setOpenChooseAnswer] = React.useState(false)
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <Grid xs={12} lg={4} item>
       <Paper
         variant="elevation"
-        sx={{ p: 3, height: "fit-content" }}
+        sx={{ p: 1, height: "fit-content" }}
         elevation={2}
       >
-        <Stack gap={3}>
+        <Stack gap={1}>
           <Stack gap={2} flexDirection={"row"} alignItems={"center"}>
             <Box
               sx={{
-                width: "60px",
-                height: "60px",
-                bgcolor: headIconBgColor,
-                borderRadius: "50%",
                 display: "flex",
-                alignItems:"center",
-                justifyContent: "center",
+                alignItems: "center",
+                justifyContent: "flex-start",
+                gap: 1
               }}
-            >
-              <HeadIcon />
+            ><IconButton sx={{
+              bgcolor: headIconBgColor,
+              borderRadius: "50%",
+            }}>
+                <HeadIcon sx={{
+                  width: "30px",
+                  height: "30px",
+                }} />
+              </IconButton>
+              <Typography variant="body1" fontWeight={"bold"} color="#1D2026">
+                {header}
+              </Typography>
             </Box>
-            <Typography variant="body1" fontWeight={"bold"} color="#1D2026">
-              {header}
-            </Typography>
-            <Box ml={"auto"}>
-              <IconBrainCloud />
-            </Box>
+
+            <IconButton sx={{ ml: 'auto' }} id="basic-button"
+              aria-controls={open ? 'basic-menu' : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? 'true' : undefined}
+              onClick={handleClick}>
+              <MoreVertIcon />
+            </IconButton>
           </Stack>
-          <TextField
-            variant="outlined"
-            label="Add Link"
-            placeholder="past your video or google drive link here"
-            InputLabelProps={{ shrink: true }}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconAttachment />
-                </InputAdornment>
-              ),
-            }}
-          />
-          <Stack gap={2} flexDirection={"row"} alignItems={"center"}>
+
+
+
+          <Stack gap={2} flexDirection={"row"} alignItems={"center"} justifyContent={'flex-start'}>
             <Typography variant="body1" fontWeight={"bold"} color="#1D2026">
               Recent
             </Typography>
-            <Box ml={"auto"}>
-              <Button variant="text" color="secondary" disableRipple>
-                See all
-              </Button>
+            <Box ml={"auto"} sx={{cursor:'pointer'}} onClick={()=>{router?.push('/resources/grammer')}}>
+              <Typography variant="caption" fontWeight={600} sx={{ color: '#16A2C4' }}>See all</Typography>
             </Box>
           </Stack>
+
+          <Stack mt={1} mb={1} justifyContent={'center'} alignItems={"center"}>
+
+            <IconBrainCloud />
+
+          </Stack>
           <Stack
-            sx={{ bgcolor: "#E0E7FF", p: 2, borderRadius: 2 }}
+            sx={{ bgcolor: "#E0E7FF", p: 1, borderRadius: 2, mb: 1, mt: 1 }}
             gap={2}
             flexDirection={"row"}
             alignItems={"center"}
           >
-            <SubtitleIcon />
+            <IconAttachment />
             <Typography variant="body1" color="#374151">
               {subtitle}
             </Typography>
-            <Box
-              ml={"auto"}
-              sx={{ display: "flex", gap: 1, alignItems: "center" }}
-            >
-              <IconButton>
-                <BorderColorIcon sx={{ color: "#16A2C4" }} />
-              </IconButton>
-              <IconButton>
-                <DeleteIcon sx={{ color: "error.main" }} />
-              </IconButton>
-            </Box>
+
           </Stack>
         </Stack>
+        <Menu
+          id="basic-menu"
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+          MenuListProps={{
+            'aria-labelledby': 'basic-button',
+          }}
+        >
+          <MenuItem onClick={() => { setOpenChooseAnswer(true) }}><BorderColorIcon sx={{ color: "#16A2C4" }} /></MenuItem>
+          <MenuItem onClick={handleClose}><DeleteIcon sx={{ color: "error.main" }} /></MenuItem>
+
+        </Menu>
       </Paper>
+      {openChooseAnswer && (
+        <AddResources openChooseAnswer={openChooseAnswer} setOpenChooseAnswer={setOpenChooseAnswer} />
+      )}
     </Grid>
   );
 };

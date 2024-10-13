@@ -1,6 +1,49 @@
 export const ConfigurationNavList = [
   {
     id: 1,
+    title: "Personal",
+    link: "/settings/personal",
+  },
+  {
+    id: 3,
+    title: "Payment Method",
+    link: "/settings/payment-method",
+  },
+  {
+    id: 4,
+    title: "Payment History",
+    link: "/settings/admin-payment-history",
+  },
+  {
+    id: 5,
+    title: "Password",
+    link: "/settings/admin-password",
+  },
+
+  {
+    id: 6,
+    title: "Delete Account",
+    link: "/settings/delete-account",
+  },
+  
+];
+
+export const AdmineNavList=[
+  {
+    id: 1,
+    title: "Users",
+    link: "/settings/users",
+  },
+  {
+    id: 1,
+    title: "Users Role",
+    link: "/settings/users-role",
+  },
+] 
+
+export const StudentNavList = [
+  {
+    id: 1,
     title: "Profile",
     link: "/settings/profile",
   },

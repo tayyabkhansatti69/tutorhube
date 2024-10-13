@@ -94,7 +94,7 @@ function StudentsSection() {
           </Box>
         );
       },
-      header: () => <span>Prepaid balance</span>,
+      header: () => <span>Subscription</span>,
       isSortable: false,
     },
     {

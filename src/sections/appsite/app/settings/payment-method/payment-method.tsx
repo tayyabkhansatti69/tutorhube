@@ -1,29 +1,32 @@
-import { Grid, Stack, Typography } from "@mui/material";
+import { IconButton, Stack, } from "@mui/material";
 import React from "react";
 import card from "@/src/assets/image/card.png";
 import Image from "next/image";
-import { useForm } from "react-hook-form";
+// import { useForm } from "react-hook-form";
 
 import AddCardModel from "./addCardModel/AddCardModel";
-import IconVisa from "@/src/assets/icons/Transaction/icon-visa";
-import IconMaster from "@/src/assets/icons/Transaction/icon-master";
-import { FormProvider, RHFSelect, RHFTextField } from "@/src/components/rhf";
+// import IconVisa from "@/src/assets/icons/Transaction/icon-visa";
+// import IconMaster from "@/src/assets/icons/Transaction/icon-master";
+// import { FormProvider, RHFSelect, RHFTextField } from "@/src/components/rhf";
+import MaximizeIcon from '@mui/icons-material/Maximize';
 
 function PaymentMethodSection() {
-  const methods = useForm({
-    defaultValues: {},
-  });
-  const { handleSubmit } = methods;
-  const onSubmit = () => {};
+  // const methods = useForm({
+  //   defaultValues: {},
+  // });
+  // const { handleSubmit } = methods;
+  // const onSubmit = () => {};
   return (
     <div>
       <Stack justifyContent={"center"} alignItems={"center"} mt={2} gap={1}>
         <Stack direction={"row"} gap={1} alignItems={"center"}>
-
-        <Image src={card} alt="card" />
-        <AddCardModel />
+          <IconButton sx={{ alignItems: 'end', justifyContent: 'center',display:'flex' }}>
+            <MaximizeIcon sx={{ color: "primary.main", fontSize: 35 }} />
+          </IconButton>
+          <Image src={card} alt="card" />
+          <AddCardModel />
         </Stack>
-        <Typography variant="body1" color="initial" fontWeight={600}>
+        {/* <Typography variant="body1" color="initial" fontWeight={600}>
           Use save Card
         </Typography>
         <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
@@ -55,7 +58,7 @@ function PaymentMethodSection() {
                 </Stack>
             </Grid>
           </Grid>
-        </FormProvider>
+        </FormProvider> */}
       </Stack>
     </div>
   );

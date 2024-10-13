@@ -25,7 +25,7 @@ function CoursesPlan() {
         individualPlan: Yup.array().of(
             Yup.object().shape({
 
-                courseName: Yup.string().required('Course Name is required'),
+                courseName: Yup.object()?.nullable().required('Course Name is required'),
                 courseHourse: Yup.object()?.nullable().required('Course Hours are required'),
                 planPerHours: Yup.string().required('Session Time is required'),
                 sessionTime: Yup.object()?.nullable().required('Plan per Hour is required'),
@@ -41,7 +41,7 @@ function CoursesPlan() {
         resolver: yupResolver(FormSchema),
         defaultValues: {
             individualPlan: [{
-                courseName: '',
+                courseName: null,
                 courseHourse: null,
                 sessionTime: null,
                 planPerHours: '',
@@ -66,9 +66,9 @@ function CoursesPlan() {
     const FormSchema2 = Yup.object().shape({
         groupPlan: Yup.array().of(
             Yup.object().shape({
-                day:Yup.string(),
-                time:Yup.string(),
-                courseName: Yup.string().required('Course Name is required'),
+                day: Yup.string(),
+                time: Yup.string(),
+                courseName: Yup.object()?.nullable().required('Course Name is required'),
                 courseHourse: Yup.object()?.nullable().required('Course Hours are required'),
                 planPerHours: Yup.string().required('Session Time is required'),
                 sessionTime: Yup.object()?.nullable().required('Plan per Hour is required'),
@@ -84,9 +84,9 @@ function CoursesPlan() {
         resolver: yupResolver(FormSchema2),
         defaultValues: {
             groupPlan: [{
-                date:'',
-                time:'',
-                courseName: '',
+                date: '',
+                time: '',
+                courseName: null,
                 courseHourse: null,
                 sessionTime: null,
                 planPerHours: '',
@@ -97,10 +97,10 @@ function CoursesPlan() {
         },
     });
 
-    const { handleSubmit:handleSubmit2, control:control2 } = methods2;
+    const { handleSubmit: handleSubmit2, control: control2 } = methods2;
 
-    const { fields:fields2, append:append2, remove:remove2 } = useFieldArray({
-        control:control2,
+    const { fields: fields2, append: append2, remove: remove2 } = useFieldArray({
+        control: control2,
         name: 'groupPlan', // The name should match the field array in the form
     });
 
@@ -129,24 +129,42 @@ function CoursesPlan() {
                         {fields.map((item, index) => (
                             <Grid2 container key={item.id} spacing={2} px={2}>
                                 <Grid2 size={{ xs: 12, md: 6 }}>
-                                    <RHFTextField
+                                    <RHFAutocompleteSync
                                         name={`individualPlan[${index}].courseName`}
+                                        placeholder="Choose Course"
                                         size="small"
-                                        label="Course Name"
-                                        fullWidth
-                                        placeholder="Enter Course Name"
+                                        options={[
+                                            { id: 1, name: 'ILETS', value: 'ilets' },
+                                            { id: 2, name: 'ENGLISH', value: 'english' },
+                                            { id: 3, name: 'URDU', value: 'urdu' },
+                                            { id: 4, name: 'ARABIC', value: 'arabic' },
+                                        ]}
                                     />
                                 </Grid2>
                                 <Grid2 size={{ xs: 12, md: 6 }}>
                                     <RHFAutocompleteSync
                                         name={`individualPlan[${index}].courseHourse`}
-                                        placeholder="Choose Type"
+                                        placeholder="Courses Hours"
                                         size="small"
                                         options={[
-                                            { id: 1, name: 'Hard', value: 'hard' },
-                                            { id: 2, name: 'Easy', value: 'easy' },
-                                            { id: 3, name: 'Intermediate', value: 'intermediate' },
-                                            { id: 4, name: 'True False', value: 'trueFalse' },
+                                            { id: 1, name: '50 min ', value: '50' },
+                                            { id: 2, name: '1 hour', value: '1' },
+                                            { id: 3, name: '1.5 hour', value: '1.5' },
+                                            { id: 4, name: '2 hours', value: '2' },
+                                            { id: 5, name: '2.5 hours', value: '2.5' },
+                                        ]}
+                                    />
+                                </Grid2>
+                                
+                                <Grid2 size={{ xs: 12, md: 6 }}>
+                                    <RHFAutocompleteSync
+                                        name={`individualPlan[${index}].sessionTime`}
+                                        placeholder="Session Time"
+                                        size="small"
+                                        options={[
+                                            { id: 1, name: 'Hourly', value: 'hourly' },
+                                            { id: 2, name: 'Weekly', value: 'weekly' },
+                                            { id: 3, name: 'Monthly', value: 'monthly' },
                                         ]}
                                     />
                                 </Grid2>
@@ -154,21 +172,9 @@ function CoursesPlan() {
                                     <RHFTextField
                                         name={`individualPlan[${index}].planPerHours`}
                                         size="small"
-                                        label="Session Time"
+                                        label="Price per hours"
                                         fullWidth
                                         placeholder="Enter Session Time"
-                                    />
-                                </Grid2>
-                                <Grid2 size={{ xs: 12, md: 6 }}>
-                                    <RHFAutocompleteSync
-                                        name={`individualPlan[${index}].sessionTime`}
-                                        placeholder="Choose Plan"
-                                        size="small"
-                                        options={[
-                                            { id: 1, name: 'Hourly', value: 'hourly' },
-                                            { id: 2, name: 'Weekly', value: 'weekly' },
-                                            { id: 3, name: 'Monthly', value: 'monthly' },
-                                        ]}
                                     />
                                 </Grid2>
                                 <Grid2 size={{ xs: 12, md: 6 }}>
@@ -263,47 +269,66 @@ function CoursesPlan() {
                             {fields2.map((item, index) => (
                                 <Grid2 container key={item.id} spacing={2} px={2}>
                                     <Grid2 size={{ xs: 12, md: 12 }}>
-                                    <Box display={'flex'} flexDirection={'row'} justifyContent={'flex-start'} alignItems={'flex-start'} gap={1}>
-                                    <Grid2 size={{ xs: 12, md: 3 }}>
-                                        <RHFDatePicker
-                                            name={`groupPlan[${index}].date`}
-                                            size="small"
-                                            label="Date"
-                                            fullWidth
-                                            placeholder="Enter Date"
-                                        />
-                                        </Grid2>
-                                        <Grid2 size={{ xs: 12, md: 3 }}>
-                                        <RHFTimePicker
-                                            name={`groupPlan[${index}].time`}
-                                            size="small"
-                                            label="Time"
-                                            fullWidth
-                                            placeholder="Enter Time"
-                                        />
-                                        </Grid2>
+                                        <Box display={'flex'} flexDirection={'row'} justifyContent={'flex-start'} alignItems={'flex-start'} gap={1}>
+                                            <Grid2 size={{ xs: 12, md: 3 }}>
+                                                <RHFDatePicker
+                                                    name={`groupPlan[${index}].date`}
+                                                    size="small"
+                                                    label="Date"
+                                                    fullWidth
+                                                    placeholder="Enter Date"
+                                                />
+                                            </Grid2>
 
-                                    </Box>
+                                            <Grid2 size={{ xs: 12, md: 3 }}>
+                                                <RHFTimePicker
+                                                    name={`groupPlan[${index}].time`}
+                                                    size="small"
+                                                    label="Time"
+                                                    fullWidth
+                                                    placeholder="Enter Time"
+                                                />
+                                            </Grid2>
+
+                                        </Box>
                                     </Grid2>
                                     <Grid2 size={{ xs: 12, md: 6 }}>
-                                        <RHFTextField
+                                        <RHFAutocompleteSync
                                             name={`groupPlan[${index}].courseName`}
+                                            placeholder="Choose Course"
                                             size="small"
-                                            label="Course Name"
-                                            fullWidth
-                                            placeholder="Enter Course Name"
+                                            options={[
+                                                { id: 1, name: 'ILETS', value: 'ilets' },
+                                                { id: 2, name: 'ENGLISH', value: 'english' },
+                                                { id: 3, name: 'URDU', value: 'urdu' },
+                                                { id: 4, name: 'ARABIC', value: 'arabic' },
+                                            ]}
                                         />
                                     </Grid2>
                                     <Grid2 size={{ xs: 12, md: 6 }}>
                                         <RHFAutocompleteSync
                                             name={`groupPlan[${index}].courseHourse`}
-                                            placeholder="Choose Type"
+                                            placeholder="Courses Hours"
                                             size="small"
                                             options={[
-                                                { id: 1, name: 'Hard', value: 'hard' },
-                                                { id: 2, name: 'Easy', value: 'easy' },
-                                                { id: 3, name: 'Intermediate', value: 'intermediate' },
-                                                { id: 4, name: 'True False', value: 'trueFalse' },
+                                                { id: 1, name: '50 min ', value: '50' },
+                                                { id: 2, name: '1 hour', value: '1' },
+                                                { id: 3, name: '1.5 hour', value: '1.5' },
+                                                { id: 4, name: '2 hours', value: '2' },
+                                                { id: 5, name: '2.5 hours', value: '2.5' },
+                                            ]}
+                                        />
+                                    </Grid2>
+                                    
+                                    <Grid2 size={{ xs: 12, md: 6 }}>
+                                        <RHFAutocompleteSync
+                                            name={`groupPlan[${index}].sessionTime`}
+                                            placeholder="Session Time"
+                                            size="small"
+                                            options={[
+                                                { id: 1, name: 'Hourly', value: 'hourly' },
+                                                { id: 2, name: 'Weekly', value: 'weekly' },
+                                                { id: 3, name: 'Monthly', value: 'monthly' },
                                             ]}
                                         />
                                     </Grid2>
@@ -311,21 +336,9 @@ function CoursesPlan() {
                                         <RHFTextField
                                             name={`groupPlan[${index}].planPerHours`}
                                             size="small"
-                                            label="Session Time"
+                                            label="Price per Hours"
                                             fullWidth
                                             placeholder="Enter Session Time"
-                                        />
-                                    </Grid2>
-                                    <Grid2 size={{ xs: 12, md: 6 }}>
-                                        <RHFAutocompleteSync
-                                            name={`groupPlan[${index}].sessionTime`}
-                                            placeholder="Choose Plan"
-                                            size="small"
-                                            options={[
-                                                { id: 1, name: 'Hourly', value: 'hourly' },
-                                                { id: 2, name: 'Weekly', value: 'weekly' },
-                                                { id: 3, name: 'Monthly', value: 'monthly' },
-                                            ]}
                                         />
                                     </Grid2>
                                     <Grid2 size={{ xs: 12, md: 6 }}>
@@ -384,8 +397,8 @@ function CoursesPlan() {
                                     startIcon={<AddIcon sx={{ color: 'white', }} />}
                                     onClick={() =>
                                         append2({
-                                            date:'',
-                                            time:'',
+                                            date: '',
+                                            time: '',
                                             courseName: '',
                                             courseHourse: null,
                                             sessionTime: null,

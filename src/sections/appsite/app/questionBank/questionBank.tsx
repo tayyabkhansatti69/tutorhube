@@ -11,12 +11,19 @@ import { useEffect, useState } from "react";
 // import CustomModal from "@/src/components/custom-model";
 import { AlertModals } from "@/src/components/AlertModel";
 import ChooseCorrectAnswer from "./chooseCorrectAnswer";
+import Image from "next/image";
+
+import contact3 from "@/src/assets/png/contact3.png"
+import contact4 from "@/src/assets/png/contact4.png"
+import contact5 from "@/src/assets/png/contact5.png"
+import contact6 from "@/src/assets/png/contact6.png"
+
 
 
 function QuestionBankSection() {
     const [isDeleteOpen, setIsDeleteOpen] = useState(false)
     const [openChooseAnswer, setOpenChooseAnswer] = useState(false)
-    const [questionTypeEnter,setQuestionTypeEnter]=useState<any[]>([])
+    const [questionTypeEnter, setQuestionTypeEnter] = useState<any[]>([])
     const quizData = {
         questions: [
             {
@@ -82,12 +89,27 @@ function QuestionBankSection() {
             {
                 id: 5,
                 type: 'matchingAnswers',
-                question: 'Match the items',
+                title: 'Match the items',
+                questionType:"text",
                 pairs: [
-                    { left: 'Foot', right: 'Leg' },
-                    { left: 'Hand', right: 'Arm' },
+                    { question: 'Foot', answer: 'Leg' },
+                    { question: 'Hand', answer: 'Arm' },
                 ],
             },
+            {
+                id: 5,
+                type: 'matchingAnswers',
+                title: 'Match the items',
+                questionType:"image",
+                pairs: [
+                    { question: contact3, answer: "Feet" },
+                    { question: contact4, answer: "Nose" },
+                    { question: contact5, answer: "Leg" },
+                    { question: contact6, answer: "Hand" },
+                ],
+            },
+
+
         ],
     };
 
@@ -122,7 +144,7 @@ function QuestionBankSection() {
     const dataOfQuestion = quizData?.questions?.filter((item) => item?.type === questionType?.value);
     console.log(selectedAnswers)
 
-    const handleClickAdd=()=>{
+    const handleClickAdd = () => {
 
         setOpenChooseAnswer(true)
     }
@@ -130,13 +152,13 @@ function QuestionBankSection() {
 
     useEffect(() => {
         if (Array.isArray(questionType)) {
-          setQuestionTypeEnter(questionType);
+            setQuestionTypeEnter(questionType);
         } else if (typeof questionType === 'object' && questionType !== null) {
-          setQuestionTypeEnter([questionType]); // Wrap the object in an array
+            setQuestionTypeEnter([questionType]); // Wrap the object in an array
         } else {
-          setQuestionTypeEnter([]); // Handle null or undefined cases
+            setQuestionTypeEnter([]); // Handle null or undefined cases
         }
-      }, [questionType]);
+    }, [questionType]);
 
     return (
         <>
@@ -178,7 +200,7 @@ function QuestionBankSection() {
                                 <Grid2 size={{ xs: 12, md: 2 }} />
                                 <Grid2 size={{ xs: 12, md: 6 }} mt={3}>
                                     <Box display={'flex'} justifyContent={'flex-end'} flexDirection={'row'} alignItems={'center'} gap={2}>
-                                        <Button variant="contained" sx={{ background: "#9CA3AF" }} startIcon={<AddIcon sx={{ color: 'white', background: "#9CA3AF" }} />}onClick={handleClickAdd}>
+                                        <Button variant="contained" sx={{ background: "#9CA3AF" }} startIcon={<AddIcon sx={{ color: 'white', background: "#9CA3AF" }} />} onClick={handleClickAdd}>
                                             Add A Question
                                         </Button>
                                         <Button variant="contained" size="small" sx={{ background: "#9CA3AF" }} startIcon={<EditIcon sx={{ color: 'white', }} />}>
@@ -364,6 +386,103 @@ function QuestionBankSection() {
                                             </Box>
                                         </>
                                     )}
+
+                                    {
+                                        item?.type === "matchingAnswers" && (
+                                            <>
+                                                {index === 0 && (
+                                                    <Box
+                                                        sx={{
+                                                            p: 2,
+                                                            backgroundColor: "#f9f9f9",
+                                                        }}
+                                                    >
+                                                        <Typography variant="h6">Matching The Correct Answer</Typography>
+                                                    </Box>
+                                                )}
+                                                <Box px={1}>
+                                                    <Box
+                                                        display="flex"
+                                                        flexDirection="row"
+                                                        justifyContent="flex-start"
+                                                        alignItems="center"
+                                                        gap={2}
+                                                        mt={1}
+                                                        mb={1}
+                                                    >
+                                                        <Checkbox />
+                                                        <Typography variant="body1" fontWeight={700}>
+                                                            {item.title}
+                                                        </Typography>
+                                                    </Box>
+
+                                                    <Grid2 size={{ xs: 12 }}>
+                                                        {item?.pairs?.map((value) => (
+                                                            <Box
+                                                                key={value?.id}
+                                                                display="flex"
+                                                                flexDirection="row"
+                                                                justifyContent="space-between"
+                                                                alignItems="flex-start"
+                                                                gap={6}
+                                                                sx={{ px: 3, mb: 1, mt: 1 }}
+                                                            >
+                                                                {/* Question Box */}
+                                                                <Box
+                                                                    display="flex"
+                                                                    justifyContent="center"
+                                                                    alignItems="center"
+                                                                    p={3}
+                                                                    sx={{
+                                                                        border: '1px solid gray',
+                                                                        borderRadius: '4px',
+                                                                        width: { xs: '100px', sm: '150px', md: '400px' }, // Fixed width for responsiveness
+                                                                        height: { xs: '100px', sm: '100px', md: '100px' }, // Fixed height for responsiveness
+                                                                        overflow: 'hidden',
+                                                                        background:'#FFF'
+                                                                    }}
+                                                                >
+                                                                    {/* Check if the question is an image or text */}
+                                                                    {item?.questionType==='image' ? (
+                                                                        <Image
+                                                                            src={value.question}
+                                                                            alt="question"
+                                                                            width={90}
+                                                                            height={70}
+                                                                            // style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }}
+                                                                        />
+                                                                    ) : (
+                                                                        <Typography>{value?.question}</Typography>
+                                                                    )}
+                                                                </Box>
+
+                                                                {/* Answer Box */}
+                                                                <Box
+                                                                    display="flex"
+                                                                    justifyContent="center"
+                                                                    alignItems="center"
+                                                                    p={3}
+                                                                    sx={{
+                                                                        border: '1px solid gray',
+                                                                        borderRadius: '4px',
+                                                                        width: { xs: '100px', sm: '150px', md: '400px' }, // Fixed width for responsiveness
+                                                                        height: { xs: '100px', sm: '100px', md: '100px' }, // Fixed height for responsiveness
+                                                                        overflow: 'hidden',
+                                                                        background:'#FFF'
+                                                                    }}
+                                                                >
+                                                                    <Typography>{value?.answer}</Typography>
+                                                                </Box>
+                                                            </Box>
+                                                        ))}
+
+
+                                                    </Grid2>
+
+                                                </Box>
+                                            </>
+                                        )
+                                    }
                                 </Grid2>
                             ))}
                         </Grid2>

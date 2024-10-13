@@ -31,6 +31,7 @@ export function ProfileHeader(props: any): JSX.Element {
     coverImage,
     setCoverImage,
     data,
+    cover,
   } = props;
   const fullName = `${data?.firstName} ${data?.lastName}`;
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
@@ -146,12 +147,16 @@ console.log(img)
                 title="green iguana"
               />
             )} */}
+            {
+
+            cover &&
             <CardMedia
                 sx={{ height: 150 }}
                 image={coverImg()}
                 // {`${awsBaseUrl}${coverImage}` ? coverImage : bg.src}
                 title="green iguana"
               />
+            }
             {/* {editFormState && (
               <IconButton
                 aria-label="Avatar Actions"

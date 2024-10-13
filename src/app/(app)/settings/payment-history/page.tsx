@@ -5,7 +5,7 @@ import PaymentHistorySection from '@/src/sections/appsite/app/settings/payment-h
 // import { Box, Button } from '@mui/material';
 import React from 'react'
 
-function paymentHistory() {
+function PaymentHistory() {
     
     return (
     <div>
@@ -14,4 +14,4 @@ function paymentHistory() {
   )
 }
 
-export default paymentHistory
+export default PaymentHistory

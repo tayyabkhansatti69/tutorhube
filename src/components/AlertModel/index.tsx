@@ -31,15 +31,15 @@ export const AlertModals = ({
         <Box display='flex' alignItems='center' justifyContent='center' position='relative' padding={'35px 22px'}>
           <Box display='flex' alignItems='center' position='absolute' flexDirection={'column'}>
             {/* {checkModalTypeForImage(type) ?? typeImage} */}
-            <IconButton sx={{background:'#C65468',borderRadius:'50%'}}>
+            <IconButton sx={{background:'#C65468',borderRadius:'50%',mt:1,mb:1}}>
             <DeleteIcon sx={{color:"white"}}/>
             </IconButton>
-            <Typography variant='h3' textTransform='capitalize' sx={{ marginLeft: 1 }}>
+            <Typography variant='h4' textTransform='capitalize' sx={{ marginLeft: 1 }}>
               {type}
             </Typography>
           </Box>
           <Box
-            sx={{ cursor: 'pointer', display: 'flex', position: 'absolute', right: 0 }}
+            sx={{ cursor: 'pointer', display: 'flex', position: 'absolute', right: 0,top:0 }}
             onClick={() => handleClose?.()}
           >
             <CloseIcon />

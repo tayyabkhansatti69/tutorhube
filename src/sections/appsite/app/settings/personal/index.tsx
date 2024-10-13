@@ -1,17 +1,11 @@
-// import { ProfileHeader } from "@/components/my-profile";
-// import {
-//   FormProvider,
-//   RHFSelect,
-//   RHFTelInput,
-//   RHFTextField,
-// } from "@/components/rhf";
+
 import { ProfileHeader } from "@/src/components/my-profile";
 import { FormProvider, RHFSelect, RHFTelInput, RHFTextField } from "@/src/components/rhf";
 import { Button, Grid, Stack, Typography } from "@mui/material";
 import React from "react";
 import { useForm } from "react-hook-form";
 
-function ProfileSection() {
+function PersonalSection() {
   const methods = useForm({
     defaultValues: {},
   });
@@ -78,6 +72,35 @@ function ProfileSection() {
                 placeholder="Enter Age "
               />
             </Grid>
+            <Grid xs={12} sm={6} p={1} item>
+              <RHFTextField
+                type="text"
+                label="Subject"
+                fullWidth
+                name="Subject"
+                placeholder="Enter subject "
+              />
+            </Grid>
+            <Grid xs={12} sm={6} p={1} item>
+              <RHFTextField
+                type="text"
+                label="Lanaguage"
+                fullWidth
+                name="language"
+                placeholder="Enter Langauage "
+              />
+            </Grid>
+            <Grid xs={12} sm={12} p={1} item>
+              <RHFTextField
+                type="text"
+                label="Bio"
+                fullWidth
+                name="bio"
+                rows={3}
+                multiline={true}
+                placeholder="Enter About your-self "
+              />
+            </Grid>
             <Grid xs={12} sm={12} p={1} item>
               <Stack direction="row" justifyContent="end" spacing={2}>
                 <Button
@@ -110,4 +133,4 @@ function ProfileSection() {
   );
 }
 
-export default ProfileSection;
+export default PersonalSection;
