@@ -16,7 +16,7 @@ import IconChat from "@/src/assets/icons/Icon-Chat";
 import { CustomChip, CustomTable, CustomTabs, TableHeader } from "@/src/components";
 
 function DashboardSection() {
-  const series = [
+  const series: any = [
     {
       name: "",
       data: [44, 0, 57, 56, 61, 58, 63, 60, 66],
@@ -281,7 +281,7 @@ function DashboardSection() {
     {
       accessorFn: (row: any) => row.pricePerLesson ?? "-",
       id: "pricePerlesson",
-      cell: (info: any) =>`$ ${ info.getValue()}`,
+      cell: (info: any) => `$ ${info.getValue()}`,
       header: () => <span>Price per lesson</span>,
       isSortable: false,
     },
@@ -369,7 +369,7 @@ function DashboardSection() {
       <Grid p={4} spacing={2} container>
         <Grid xs={12} lg={8} spacing={2} item>
           <Grid spacing={2} container>
-            <Grid xs={12} lg={4} item>
+            <Grid xs={12} md={3} lg={4} item>
               <Paper variant="elevation" elevation={2}>
                 <Stack
                   p={2}
@@ -377,19 +377,35 @@ function DashboardSection() {
                   gap={1}
                   alignItems={"flex-start"}
                 >
-                  <Typography variant="h4" color="#374557">
+                  <Typography
+                    variant="h4"
+                    sx={{
+                      fontSize: {
+                        xs: '14px', // Extra small screens
+                        sm: '16px', // Small screens
+                        md: '18px', // Medium screens
+                        lg: '20px', // Large screens
+                        xl: '22px'  // Extra large screens
+                      }
+                    }}
+                    color="#374557"
+                  >
                     Total Students
                   </Typography>
+
                   <ReactApexChart
                     options={options}
                     series={series}
                     type="bar"
                     height={150}
+
+
                   />
                   <Box
                     display="flex"
                     justifyContent={"center"}
-                    alignItems={"center"}
+                    alignItems={"flex-start"}
+                    flexWrap={'nowrap'}
                     width={"100%"}
                   >
                     <Typography
@@ -409,14 +425,14 @@ function DashboardSection() {
                         >
                           5.4%
                         </Box>
-                        than last year
+                        {/* than last year */}
                       </Typography>
                     </Box>
                   </Box>
                 </Stack>
               </Paper>
             </Grid>
-            <Grid xs={12} lg={4} item>
+            <Grid xs={12} md={3} lg={4} item>
               <Paper variant="elevation" elevation={2}>
                 <Stack
                   p={2}
@@ -424,7 +440,15 @@ function DashboardSection() {
                   gap={1}
                   alignItems={"flex-start"}
                 >
-                  <Typography variant="h4" color="#374557">
+                  <Typography variant="h4" color="#374557"                     sx={{
+                      fontSize: {
+                        xs: '14px', // Extra small screens
+                        sm: '16px', // Small screens
+                        md: '18px', // Medium screens
+                        lg: '20px', // Large screens
+                        xl: '22px'  // Extra large screens
+                      }
+                    }}>
                     Courses
                   </Typography>
                   <Box
@@ -450,7 +474,7 @@ function DashboardSection() {
                         >
                           +15%
                         </Box>
-                        than last year
+                        {/* than last year */}
                       </Typography>
                     </Box>
                   </Box>
@@ -463,14 +487,22 @@ function DashboardSection() {
                 </Stack>
               </Paper>
             </Grid>
-            <Grid xs={12} lg={4} item>
+            <Grid xs={12} md={3} lg={4} item>
               <Paper variant="elevation" elevation={2}>
                 <Stack
                   p={2}
                   justifyContent={"center"}
                   alignItems={"flex-start"}
                 >
-                  <Typography variant="h4" color="#374557">
+                  <Typography variant="h4" color="#374557"                     sx={{
+                      fontSize: {
+                        xs: '14px', // Extra small screens
+                        sm: '16px', // Small screens
+                        md: '18px', // Medium screens
+                        lg: '20px', // Large screens
+                        xl: '22px'  // Extra large screens
+                      }
+                    }}>
                     Prepaid
                   </Typography>
 
@@ -482,10 +514,11 @@ function DashboardSection() {
                   />
                   <Box
                     display="flex"
-                    flexDirection={"column"}
-                    justifyContent={"center"}
+                    flexDirection={"row"}
+                    justifyContent={"space-between"}
                     alignItems={"flex-start"}
                     width={"100%"}
+                    mt={2}
                   >
                     <Typography
                       variant="subtitle1"
@@ -551,7 +584,7 @@ function DashboardSection() {
             </Grid>
           </Grid>
         </Grid>
-        <Grid xs={12} lg={4} item>
+        <Grid xs={12} md={4} lg={4} item>
           <Paper
             variant="elevation"
             sx={{
@@ -644,7 +677,7 @@ function DashboardSection() {
                 />
               </Box>
               <Box>
-              <Box px={2} my={1}>
+                <Box px={2} my={1}>
                   <TableHeader
                     tableHeaderData={[
                       {

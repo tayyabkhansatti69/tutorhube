@@ -4,8 +4,9 @@ import dynamic from "next/dynamic";
 import { styled } from "@mui/material/styles";
 import { Box } from "@mui/material";
 import { EditorToolbar, formats } from "./editor-toolbar";
-import "react-quill/dist/quill.snow.css";
-//
+import hljs from "../../utils/highlight"; // Adjust the path to where highlight.ts is located
+import "react-quill/dist/quill.snow.css"; // Ensure this import is correct
+
 const ReactQuill = dynamic(() => import("react-quill"), {
   ssr: false,
   loading: () => (
@@ -78,10 +79,21 @@ export function Editor({
       maxStack: 100,
       userOnly: true,
     },
-    syntax: true,
+    syntax: true, // Enables syntax highlighting
     clipboard: {
       matchVisual: false,
     },
+  };
+
+  // Initialize hljs for syntax highlighting (if needed)
+  const handleQuillChange = (content: string, delta: any, source: any, editor: any) => {
+    onChange(content); // Call the original onChange function
+    if (source === 'api') {
+      const codeBlocks = editor.root.querySelectorAll('pre code');
+      codeBlocks.forEach((block) => {
+        hljs.highlightElement(block); // Highlight each code block
+      });
+    }
   };
 
   return (
@@ -98,7 +110,7 @@ export function Editor({
         <ReactQuill
           value={value}
           defaultValue={defaultValue}
-          onChange={onChange}
+          onChange={handleQuillChange} // Use the new change handler
           modules={modules}
           formats={formats}
           placeholder="Write something awesome..."

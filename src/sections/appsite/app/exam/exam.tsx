@@ -12,7 +12,10 @@ import {
   Paper,
   Typography
 } from "@mui/material";
+import { useRouter } from "next/navigation";
 function ExamSection() {
+
+  const router=useRouter()
   const columns = [
     {
       id: "select",
@@ -288,7 +291,7 @@ function ExamSection() {
             <Box>
               <Box display={'flex'} flexDirection={'row'} justifyContent={'flex-end'} flexWrap={'nowrap'} alignItems={'end'} pr={2}>
 
-                <Button variant="contained" sx={{ backgroundColor: '#242459', color: '#FFF' }} >
+                <Button variant="contained" sx={{ backgroundColor: '#242459', color: '#FFF' }}  onClick={()=>{router?.push('/exam/quiz')}}>
                   Create Quiz
                 </Button>
               </Box>
@@ -328,7 +331,7 @@ function ExamSection() {
             <Box>
               <Box display={'flex'} flexDirection={'row'} justifyContent={'flex-end'} flexWrap={'nowrap'} alignItems={'end'} pr={2}>
 
-                <Button variant="contained" sx={{ backgroundColor: '#242459', color: '#FFF' }} >
+                <Button variant="contained" sx={{ backgroundColor: '#242459', color: '#FFF' }} onClick={()=>{router?.push('/exam/assignment')}}>
                   Create Assignment
                 </Button>
               </Box>
@@ -372,7 +375,7 @@ function ExamSection() {
             <Box>
               <Box display={'flex'} flexDirection={'row'} justifyContent={'flex-end'} flexWrap={'nowrap'} alignItems={'end'} pr={2}>
 
-                <Button variant="contained" sx={{ backgroundColor: '#242459', color: '#FFF' }} >
+                <Button variant="contained" sx={{ backgroundColor: '#242459', color: '#FFF' }} onClick={()=>{router?.push('/exam/create-exam')}}>
                   Create Exam
                 </Button>
               </Box>

@@ -1,5 +1,5 @@
 export * from "./status-color-handler";
-// export * from "./highlight";
+export * from "./highlight";
 export * from "./local-storage";
 export * from "./obj-from-array";
 
