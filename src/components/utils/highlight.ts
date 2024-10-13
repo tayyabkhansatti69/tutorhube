@@ -10,13 +10,13 @@ hljs.configure({
 // Declare global interface for window
 declare global {
   interface Window {
-    hljs: typeof hljs;
+    hljs: typeof hljs; // Ensure hljs type matches the expected type
   }
 }
 
 // Assign hljs to the window object if it's in the browser environment
 if (typeof window !== "undefined") {
-  window.hljs = hljs;
+  window.hljs = hljs as typeof window.hljs; // Use type assertion
 }
 
 export default hljs; // Export hljs for use in other modules
