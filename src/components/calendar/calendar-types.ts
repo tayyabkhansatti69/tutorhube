@@ -27,7 +27,7 @@ export interface IPOPOVERDATA {
 // }
 export interface IREMINDER {
   label: string;
-  dateAndTime: dayjs.Dayjs | null;
+  dateAndTime: dayjs.Dayjs ;
   error?: string | undefined;
 }
 
