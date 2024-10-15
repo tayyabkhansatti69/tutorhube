@@ -78,7 +78,7 @@ export const NavListDataStudent = [
   {
     label: "Dashboard",
     icon: HomeIcons,
-    link: "/dashboard",
+    link: "/studentDashboard",
   },
   {
     label: "My Lesson",

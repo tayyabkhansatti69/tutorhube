@@ -20,7 +20,9 @@ import IconSetting from "@/src/assets/icons/dashboard-main/icon-setting";
 import IconWallet from "@/src/assets/icons/dashboard-main/icon-wallet";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { NavListData } from "../left-navbar/left-navbar.data";
+import { NavListData, NavListDataAdmine, NavListDataStudent } from "../left-navbar/left-navbar.data";
+import { getLocalStorage } from "@/src/utils";
+
 
 function TopNavBar(props: any) {
   const theme: any = useTheme();
@@ -29,9 +31,12 @@ function TopNavBar(props: any) {
   const screenSizeHandler = useMediaQuery(theme.breakpoints.down("md"));
   const pathname = usePathname();
 
-  const title=NavListData.filter(nav => pathname.includes(nav.link))[0]?.label
+  const loginUser: any = getLocalStorage('rememberMe')
+
+  // const title=NavListData.filter(nav => pathname.includes(nav.link))[0]?.label
+
   return (
-    <Box position={{md:"fixed",xs:"static"}} boxShadow={1} sx={Styles.mainBoxStyle(leftopen, theme)}>
+    <Box position={{ md: "fixed", xs: "static" }} boxShadow={1} sx={Styles.mainBoxStyle(leftopen, theme)}>
       <Grid container>
         <Grid xs={12} item display="flex" alignItems="center" flexWrap={"wrap"}>
           {screenSizeHandler && (
@@ -39,10 +44,27 @@ function TopNavBar(props: any) {
               <MenuIcon />
             </IconButton>
           )}
-
-          <Typography fontSize={"25px"} color={"#343C6A"} fontWeight={600}>
-            {title}
-          </Typography>
+          {
+            loginUser?.email === "teacher@gmail.com" && loginUser?.password === '123' && (
+              <Typography fontSize={"25px"} color={"#343C6A"} fontWeight={600}>
+                {NavListData.filter(nav => pathname.includes(nav.link))[0]?.label}
+              </Typography>
+            )
+          }
+        {
+            loginUser?.email === "student@gmail.com" && loginUser?.password === '123' && (
+              <Typography fontSize={"25px"} color={"#343C6A"} fontWeight={600}>
+                {NavListDataStudent.filter(nav => pathname.includes(nav.link))[0]?.label}
+              </Typography>
+            )
+          }
+          {
+            loginUser?.email === "admine@gmail.com" && loginUser?.password === '123' && (
+              <Typography fontSize={"25px"} color={"#343C6A"} fontWeight={600}>
+                {NavListDataAdmine.filter(nav => pathname.includes(nav.link))[0]?.label}
+              </Typography>
+            )
+          }
 
           <Box
             ml={"auto"}
@@ -51,7 +73,7 @@ function TopNavBar(props: any) {
             gap={3}
             flexWrap={"wrap"}
           >
-            <Button variant="text" size="small" sx={{ color: "common.black" }}  startIcon={<IconWallet />}>
+            <Button variant="text" size="small" sx={{ color: "common.black" }} startIcon={<IconWallet />}>
               0 USD
             </Button>
             <Button variant="outlined" sx={{ color: "common.black" }} size="small">invite Friend</Button>
@@ -62,7 +84,7 @@ function TopNavBar(props: any) {
               <Iconbell />
             </IconButton>
             <IconButton>
-              <IconSetting sx={{ color: "#9A9A9A" }}/>
+              <IconSetting sx={{ color: "#9A9A9A" }} />
             </IconButton>
             <IconButton>
               <Image src={person} alt="person" />

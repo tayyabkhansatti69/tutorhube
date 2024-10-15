@@ -31,7 +31,7 @@ function SignInForm() {
       router.push("/dashboard");
     }else if(data?.email==="student@gmail.com"&& data?.password==='123')
     {
-    router.push("/dashboard");
+    router.push("/studentDashboard");
     }else if(data?.email==="admine@gmail.com"&& data?.password==='123')
       {
       router.push("/dashboard");
