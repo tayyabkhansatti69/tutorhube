@@ -13,6 +13,7 @@ import LiveClassIcon from "@/src/assets/icons/left-navbar-icons/live-class-icons
 import IconExam from "@/src/assets/icons/dashboard-main/icon-exam";
 import IconQuestionBank from "@/src/assets/icons/dashboard-main/icon-question-bank";
 import IconCourses from "@/src/assets/icons/dashboard-main/icon-courses";
+import MyLessonIcon from "@/src/assets/icons/left-navbar-icons/my-lesson-icon";
 //==========================================================================================
 // CONST
 export const NavListData = [
@@ -82,8 +83,8 @@ export const NavListDataStudent = [
   },
   {
     label: "My Lesson",
-    icon: AccountsIcons,
-    link: "/schedule",
+    icon: MyLessonIcon,
+    link: "/myLesson",
   },
   {
     label: "Schedule",
