@@ -27,7 +27,7 @@ function MyLessonSection() {
         },
         {
             images: Course2,
-            courseName: 'Course Name',
+            courseName: 'Web Developer',
             price: '50.09',
             teacherName: 'Teacher Name',
             rating: '4',
@@ -36,7 +36,7 @@ function MyLessonSection() {
         },
         {
             images: Course3,
-            courseName: 'Course Name',
+            courseName: 'Web Developer',
             price: '50.09',
             teacherName: 'Teacher Name',
             rating: '4',
@@ -45,7 +45,7 @@ function MyLessonSection() {
         },
         {
             images: Course4,
-            courseName: 'Course Name',
+            courseName: 'Web Developer',
             price: '50.09',
             teacherName: 'Teacher Name',
             rating: '4',
@@ -54,7 +54,7 @@ function MyLessonSection() {
         },
         {
             images: Course5,
-            courseName: 'Course Name',
+            courseName: 'Web Developer',
             price: '50.09',
             teacherName: 'Teacher Name',
             rating: '4',
@@ -63,7 +63,7 @@ function MyLessonSection() {
         },
         {
             images: Course6,
-            courseName: 'Course Name',
+            courseName: 'Web Developer',
             price: '50.09',
             teacherName: 'Teacher Name',
             rating: '4',
@@ -104,12 +104,13 @@ export default MyLessonSection
 const Card4 = ({
     images,
     courseName,
-    price,
+    
     teacherName,
     rating,
     content,
     done
 }: any) => {
+    const router=useRouter();
     return (
         <Grid xs={12} md={4} item>
             <Paper variant="elevation" sx={{ p: 2 }} elevation={2}>
@@ -130,14 +131,14 @@ const Card4 = ({
                         />
                     </Box>
                     <Box sx={{ width: '100%' }}>
-                    <LinearProgress variant="determinate"  value={(done / content) * 100} sx={{ 
-    height: 10, 
-    borderRadius:1,
-    backgroundColor: 'lightgray',  // Background color for the empty part
-    '& .MuiLinearProgress-bar': {
-      backgroundColor: '#3269D3',   // Custom blue color for the bar
-    }
-  }}  />
+                        <LinearProgress variant="determinate" value={(done / content) * 100} sx={{
+                            height: 10,
+                            borderRadius: 1,
+                            backgroundColor: 'lightgray',  // Background color for the empty part
+                            '& .MuiLinearProgress-bar': {
+                                backgroundColor: '#3269D3',   // Custom blue color for the bar
+                            }
+                        }} />
                     </Box>
                     <Box
                         display="flex"
@@ -145,13 +146,24 @@ const Card4 = ({
                         alignItems="center"
                         flexDirection="row"
                     >
-                        <Typography variant="body2" fontWeight="bold">
+                        <Typography variant="caption" fontWeight="bold">
                             {courseName}
                         </Typography>
-                        <Typography variant="body2" fontWeight="bold">
-                            <span style={{ color: 'primary' }}>$</span>
-                            {price}
+                       < Typography variant="caption" fontWeight="bold">
+                            {content}/{done}
                         </Typography>
+                        
+                    </Box>
+                    <Box
+                        display="flex"
+                        justifyContent="flex-start"
+                        alignItems="center"
+                        flexDirection="row"
+                    >
+                        <Typography variant="body1" fontWeight="bold">
+                            {courseName}
+                        </Typography>
+                        
                     </Box>
                     <Box
                         display="flex"
@@ -174,9 +186,11 @@ const Card4 = ({
                             <IconCourseContent sx={{ fontSize: 14 }} />
                             <Typography variant="caption" sx={{ color: '#B4B4B4' }}>{content}+ Content</Typography>
                         </Box>
+                        <Box onClick={()=>{router?.push('/myLesson/lessonContinue')}} sx={{cursor:'pointer'}}>
                         <Typography variant="caption" fontWeight="bold" color="primary">
-                            View Details
+                            Continue
                         </Typography>
+                        </Box>
 
                     </Box>
                 </Box>
