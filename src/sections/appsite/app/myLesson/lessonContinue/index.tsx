@@ -1,4 +1,4 @@
-import { Box, Button, CardMedia, Divider, Grid, IconButton, LinearProgress, Rating, Stack, Typography, } from "@mui/material"
+import { Box, Button, CardMedia, Divider, Grid, IconButton, LinearProgress, Paper, Rating, Stack, Typography, } from "@mui/material"
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useRouter } from "next/navigation";
 import StarIcon from '@mui/icons-material/Star';
@@ -30,7 +30,7 @@ function LessonContinueSection() {
                         src="/videos/my-video.mp4"
                     />
                 </Box>
-                <CustomTabs tabsNameArray={["About", "Reviews","Subscription"]}>
+                <CustomTabs tabsNameArray={["About", "Reviews", "Subscription"]}>
                     <Box p={1} display={'flex'} flexDirection={'column'} justifyContent={'flex-start'} alignItems={'flex-start'} gap={1}>
                         <Typography variant="h6">About Course</Typography>
                         <Typography variant="caption">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
@@ -95,13 +95,32 @@ function LessonContinueSection() {
 
             <Grid item xs={12} md={4} >
                 <Grid container spacing={2}>
-            <Grid item xs={12}>
-            <ProgressCard/>
-            </Grid>
-            <Grid item xs={12}>
-            <CourseList/>
-            </Grid>
-            </Grid>
+                    <Grid item xs={12}>
+                        <ProgressCard />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <CourseList />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Paper elevation={3} sx={{ p: 1, borderRadius: 2 }}>
+                            <Grid container direction="column" spacing={1}>
+                                <Grid item>
+                                    <Typography variant="h6" fontWeight="bold">
+                                        Quiz
+                                    </Typography>
+                                </Grid>
+
+                                <Grid item>
+                                    <Grid container justifyContent="flex-start">
+                                        <Box onClick={()=>{router?.push('/myLesson/paper')}} sx={{cursor:'pointer',p:1}}>
+                                            <Typography variant="body1">Phycis</Typography>
+                                        </Box>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </Paper>
+                    </Grid>
+                </Grid>
             </Grid>
 
 

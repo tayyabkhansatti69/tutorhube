@@ -107,12 +107,12 @@ export const NavListDataAdmine = [
   {
     label: "Dashboard",
     icon: HomeIcons,
-    link: "/dashboard",
+    link: "/adminDashboard",
   },
   {
     label: "User Managment",
     icon: HomeIcons,
-    link: "/dashboard",
+    link: "/userManagment",
   },
   {
     label: "Transaction",
@@ -132,12 +132,12 @@ export const NavListDataAdmine = [
   {
     label: "Notification",
     icon: InvestmentsIcons,
-    link: "/students",
+    link: "/notification",
   },
 {
     label: "Settings",
     icon: IconSetting,
-    link: "/settings",
+    link: "/adminSetting",
   },
 
 ];
