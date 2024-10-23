@@ -37,14 +37,14 @@ const cardData = [
 
 const DashboardCard = () => {
   return (
-    <Grid container spacing={2}>
+    <Grid container spacing={1}>
       {cardData.map((card, index) => (
-        <Grid item xs={12} sm={4} key={index}>
+        <Grid item xs={12} sm={6} md={4} key={index}>
           <Box
             sx={{
               display: 'flex',
               alignItems: 'center',
-              padding: 2,
+              padding: 1,
               borderRadius: '12px',
               boxShadow: 3,
               bgcolor: '#fff',
@@ -75,37 +75,37 @@ const DashboardCard = () => {
 
             {/* Conditional rendering for different card types */}
             <Box flexGrow={1}>
-              <Typography variant="body1" fontWeight="bold" mb={1}>
+              <Typography variant="caption" fontWeight="bold" mb={1}>
                 {card.title}
               </Typography>
               {card.total !== undefined ? (
-                <Typography variant="h4" fontWeight="bold" mb={1}>
+                <Typography variant="h5" fontWeight="bold" mb={1}>
                   {card.total}
                 </Typography>
               ) : null}
               {card.currentMonth ? (
                 <>
                   <Box display="flex" justifyContent="space-between">
-                    <Typography variant="body2" color='primary'>Current Month</Typography>
-                    <Typography variant="body2" fontWeight="bold">
+                    <Typography variant="caption" color='primary'>Current Month</Typography>
+                    <Typography variant="caption" fontWeight="bold">
                       {card.currentMonth}
                     </Typography>
                   </Box>
                   <Box display="flex" justifyContent="space-between">
-                    <Typography variant="body2" color='primary'>Last Month</Typography>
-                    <Typography variant="body2" fontWeight="bold">
+                    <Typography variant="caption" color='primary'>Last Month</Typography>
+                    <Typography variant="caption" fontWeight="bold">
                       {card.lastMonth}
                     </Typography>
                   </Box>
                   <Box display="flex" justifyContent="space-between">
-                    <Typography variant="body2" color='primary'>Current Year</Typography>
-                    <Typography variant="body2" fontWeight="bold">
+                    <Typography variant="caption" color='primary'>Current Year</Typography>
+                    <Typography variant="caption" fontWeight="bold">
                       {card.currentYear}
                     </Typography>
                   </Box>
                   <Box display="flex" justifyContent="space-between">
-                    <Typography variant="body2" color='primary'>Last Year</Typography>
-                    <Typography variant="body2" fontWeight="bold">
+                    <Typography variant="caption" color='primary'>Last Year</Typography>
+                    <Typography variant="caption" fontWeight="bold">
                       {card.lastYear}
                     </Typography>
                   </Box>
@@ -118,15 +118,15 @@ const DashboardCard = () => {
               <Box sx={{ textAlign: 'right' }}>
                 <Box display="flex" alignItems="center" mb={1} gap={1}>
                   <CircleIcon  sx={{ fontSize:'10px',color: card.activeColor,  }} />
-                  <Typography variant="body2" color='primary'>Active</Typography>
-                  <Typography variant="body2"  fontWeight="bold">
+                  <Typography variant="caption" color='primary'>Active</Typography>
+                  <Typography variant="caption"  fontWeight="bold">
                     {card.active}
                   </Typography>
                 </Box>
                 <Box display="flex" alignItems="center" gap={1}>
                   <CircleIcon  sx={{ fontSize:'10px',color: card.inactiveColor,  }} />
-                  <Typography variant="body2" color='primary'>Inactive</Typography>
-                  <Typography variant="body2" fontWeight="bold">
+                  <Typography variant="caption" color='primary'>Inactive</Typography>
+                  <Typography variant="caption" fontWeight="bold">
                     {card.inactive}
                   </Typography>
                 </Box>

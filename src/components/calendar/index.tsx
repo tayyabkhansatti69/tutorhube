@@ -101,7 +101,7 @@ export function MyCalendar(): JSX.Element {
               <IconButton onClick={handlePrev}>
                 <KeyboardArrowLeftIcon />
               </IconButton>
-              <Typography variant="h5" fontWeight={800} sx={{ fontSize: { md: '14px' } }} color="#374557">
+              <Typography variant="h5" fontWeight={800} sx={{ fontSize: { xs: '14px' } }} color="#374557">
                 {title}
               </Typography>
               <IconButton onClick={handleNext}>

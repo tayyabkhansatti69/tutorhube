@@ -8,7 +8,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 function ScheduleSection() {
   return (
-    <Grid p={6} mt={6} container>
+    <Grid pt={6} px={1} mt={6} container>
       <Grid xs={12} md={8} lg={8}>
         <Paper variant="elevation" elevation={2}>
           <MyCalendar />
@@ -18,7 +18,7 @@ function ScheduleSection() {
         <Grid xs={12} px={1} lg={12}>
           <Paper variant="elevation" sx={{ p: 1 }} elevation={2}>
             <Stack gap={1} alignItems={"flex-start"} justifyContent={"center"}>
-              <Typography variant="h4" sx={{ fontSize: { md: '16px' } }} color="#374557">
+              <Typography variant="h4" sx={{ fontSize: { xs: '16px' } }} color="#374557">
                 Upcoming Task
               </Typography>
               <Box
@@ -35,7 +35,7 @@ function ScheduleSection() {
                 }}
               >
                 <CircleIcon sx={{ fontSize: 12 }} />
-                <Typography variant="body1" fontWeight={"bold"} sx={{ fontSize: { md: '14px' } }} color="white">
+                <Typography variant="body1" fontWeight={"bold"} sx={{ fontSize: { xs: '14px' } }} color="white">
                   Set up availability
                 </Typography>
               </Box>
@@ -54,7 +54,7 @@ function ScheduleSection() {
                 }}
               >
                 <CircleIcon sx={{ fontSize: 12 }} />
-                <Typography variant="body1" fontWeight={'bold'} sx={{ fontSize: { md: '14px' } }} color="white">
+                <Typography variant="body1" fontWeight={'bold'} sx={{ fontSize: { xs: '14px' } }} color="white">
                   Add extra slots
                 </Typography>
               </Box>
@@ -73,7 +73,7 @@ function ScheduleSection() {
                 }}
               >
                 <CircleIcon sx={{ fontSize: 12 }} />
-                <Typography variant="body1" fontWeight={'bold'} sx={{ fontSize: { md: '14px' } }} color="white">
+                <Typography variant="body1" fontWeight={'bold'} sx={{ fontSize: { xs: '14px' } }} color="white">
                   Add time off
                 </Typography>
               </Box>
@@ -84,7 +84,7 @@ function ScheduleSection() {
         <Grid xs={12} px={1} lg={12}>
           <Paper variant="elevation" sx={{ p: 1 }} elevation={2}>
             <Stack gap={1}  alignItems={"flex-start"} justifyContent={"center"}>
-              <Typography variant="h4" sx={{ md: { fontSize: '16px', fontWeight: { md: 600 } } }} color="#374557">
+              <Typography variant="h4" sx={{ xs: { fontSize: '16px', fontWeight: { xs: 600 } } }} color="#374557">
                 Tags
               </Typography>
 
@@ -92,13 +92,13 @@ function ScheduleSection() {
               <Stack flexDirection={"row"} gap={4} justifyContent={'space-between'} display={'flex'}>
                 <Box display="flex" gap={1} alignItems={"center"}>
                   <CircleIcon sx={{ fontSize: 16, color: "#3269D3" }} />
-                  <Typography variant="body1" fontWeight={"bold"} sx={{ fontSize: { md: '12px' },fontWeight:{md:600}  }} color="#9A9A9A">
+                  <Typography variant="body1" fontWeight={"bold"} sx={{ fontSize: { xs: '12px' },fontWeight:{xs:600}  }} color="#9A9A9A">
                     Lesson
                   </Typography>
                 </Box>
                 <Box display="flex" gap={1} alignItems={"center"}>
                   <CircleIcon sx={{ fontSize: 16, color: "#4CAF50" }} />
-                  <Typography variant="body1" fontWeight={"bold"} sx={{ fontSize: { md: '12px' },fontWeight:{md:600} }} color="#9A9A9A">
+                  <Typography variant="body1" fontWeight={"bold"} sx={{ fontSize: { xs: '12px' },fontWeight:{xs:600} }} color="#9A9A9A">
                     Availability
                   </Typography>
                 </Box>
@@ -108,13 +108,13 @@ function ScheduleSection() {
               <Stack flexDirection={"row"} gap={4} justifyContent={'space-between'} display={'flex'}>
                 <Box display="flex" gap={1} alignItems={"center"}>
                   <CircleIcon sx={{ fontSize: 16, color: "#FC6B57" }} />
-                  <Typography variant="body1" fontWeight={"bold"} sx={{ fontSize: { md: '12px' },fontWeight:{md:600} }} color="#9A9A9A">
+                  <Typography variant="body1" fontWeight={"bold"} sx={{ fontSize: { xs: '12px' },fontWeight:{xs:600} }} color="#9A9A9A">
                     Time off
                   </Typography>
                 </Box>
                 <Box  display="flex" gap={1} justifyContent={'center'} alignItems={"center"}>
                   <CircleIcon sx={{ fontSize: 16, color: "#D9D9D9" }} />
-                  <Typography variant="body1" fontWeight={"bold"} sx={{ fontSize: { md: '12px' },fontWeight:{md:600} }} color="#9A9A9A">
+                  <Typography variant="body1" fontWeight={"bold"} sx={{ fontSize: { xs: '12px' },fontWeight:{xs:600} }} color="#9A9A9A">
                     Confirmed By student
                   </Typography>
                 </Box>
@@ -159,15 +159,15 @@ function ScheduleSection() {
                     borderRadius: 1,
                   }}
                 >
-                  <Typography variant="body2" sx={{fontSize:{md:'14px'}}} fontWeight={"bold"} color="#374557">
+                  <Typography variant="body2" sx={{fontSize:{xs:'14px'}}} fontWeight={"bold"} color="#374557">
                     5
                   </Typography>
-                  <Typography variant="body2" sx={{fontSize:{md:'14px'}}} color="#374557">
+                  <Typography variant="body2" sx={{fontSize:{xs:'14px'}}} color="#374557">
                     Jan
                   </Typography>
                 </Box>
                 <Stack gap={1}>
-                  <Typography variant="body1" fontWeight={"bold"} sx={{fontSize:{md:'14px'}}} color="#374557">
+                  <Typography variant="body1" fontWeight={"bold"} sx={{fontSize:{xs:'14px'}}} color="#374557">
                     course name
                   </Typography>
                   <Typography
@@ -179,7 +179,7 @@ function ScheduleSection() {
                       flexDirection: "row",
                       gap: 1,
                       alignItems: "center",
-                      fontSize:{md:'12px'}
+                      fontSize:{xs:'12px'}
                     }}
                   >
                     <AccessAlarmsIcon sx={{ fontSize: 14 }} />
@@ -224,15 +224,15 @@ function ScheduleSection() {
                     borderRadius: 1,
                   }}
                 >
-                  <Typography variant="body2" sx={{fontSize:{md:'14px'}}} fontWeight={"bold"} color="#374557">
+                  <Typography variant="body2" sx={{fontSize:{xs:'14px'}}} fontWeight={"bold"} color="#374557">
                     5
                   </Typography>
-                  <Typography variant="body2" sx={{fontSize:{md:'14px'}}} color="#374557">
+                  <Typography variant="body2" sx={{fontSize:{xs:'14px'}}} color="#374557">
                     Jan
                   </Typography>
                 </Box>
                 <Stack gap={1}>
-                  <Typography variant="body1" fontWeight={"bold"} sx={{fontSize:{md:'14px'}}} color="#374557">
+                  <Typography variant="body1" fontWeight={"bold"} sx={{fontSize:{xs:'14px'}}} color="#374557">
                     course name
                   </Typography>
                   <Typography
@@ -244,7 +244,7 @@ function ScheduleSection() {
                       flexDirection: "row",
                       gap: 1,
                       alignItems: "center",
-                      fontSize:{md:'12px'}
+                      fontSize:{xs:'12px'}
                     }}
                   >
                     <AccessAlarmsIcon sx={{ fontSize: 14 }} />
@@ -288,15 +288,15 @@ function ScheduleSection() {
                     borderRadius: 1,
                   }}
                 >
-                  <Typography variant="body2" sx={{fontSize:{md:'14px'}}} fontWeight={"bold"} color="#374557">
+                  <Typography variant="body2" sx={{fontSize:{xs:'14px'}}} fontWeight={"bold"} color="#374557">
                     5
                   </Typography>
-                  <Typography variant="body2" sx={{fontSize:{md:'14px'}}} color="#374557">
+                  <Typography variant="body2" sx={{fontSize:{xs:'14px'}}} color="#374557">
                     Jan
                   </Typography>
                 </Box>
                 <Stack gap={1}>
-                  <Typography variant="body1" fontWeight={"bold"} sx={{fontSize:{md:'14px'}}} color="#374557">
+                  <Typography variant="body1" fontWeight={"bold"} sx={{fontSize:{xs:'14px'}}} color="#374557">
                     course name
                   </Typography>
                   <Typography
@@ -308,7 +308,7 @@ function ScheduleSection() {
                       flexDirection: "row",
                       gap: 1,
                       alignItems: "center",
-                      fontSize:{md:'12px'}
+                      fontSize:{xs:'12px'}
                     }}
                   >
                     <AccessAlarmsIcon sx={{ fontSize: 14 }} />
