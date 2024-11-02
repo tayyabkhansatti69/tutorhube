@@ -1,16 +1,20 @@
 // import { RHFSelect, RHFTelInput, RHFTextField } from "@/components/rhf";
 // import { RHFUploadSingleFileWithoutPreview } from "@/components/rhf/rhf-upload";
+
 import { RHFTextField } from "@/src/components/rhf";
 import { Button, Grid, Typography } from "@mui/material";
+import { useState } from "react";
+import VideoAddModel from "./video";
 
 function IntroVideoForm() {
+  const [open, setOpen] = useState(false)
   return (
     <Grid container>
       <Grid xs={12} sm={12} p={1} item>
         <RHFTextField
           label="About You"
           fullWidth
-          name="About"
+          name="about"
           placeholder="Write a Short description about yourself"
           multiline="true"
           rows={4}
@@ -33,14 +37,20 @@ function IntroVideoForm() {
           textAlign="center"
           color="intial"
         >
-          <Button variant="text" color="primary">
+          <Button variant="text" color="primary" onClick={() => setOpen(true)}>
             Click here
           </Button>
           {`Click here To Upload OR Record a Intro Video`}
         </Typography>
       </Grid>
+      {
+        open && (
+          <VideoAddModel open={open} setOpen={setOpen} />
+        )
+      }
     </Grid>
   );
 }
 
 export default IntroVideoForm;
+

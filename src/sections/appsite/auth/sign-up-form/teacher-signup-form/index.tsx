@@ -10,7 +10,7 @@ import {
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 // import {
 //   FormProvider,
 //   RHFSelect,
@@ -30,18 +30,136 @@ import WorkDetailsForm from "./WorkDetailsForm";
 import IntroVideoForm from "./IntroVideoForm";
 import { CustomChildRenderer, CustomJobStepper, StyledLink } from "@/src/components";
 import { FormProvider } from "@/src/components/rhf";
+import { useSignUpMutation } from "@/src/services/auth-api";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as Yup from 'yup';
+import toast from "react-hot-toast";
+import { setLocalStorage } from "@/src/utils";
 
 const steps = ["Personal", "Work Details", "Intro Video"];
+export const Schema = Yup.object().shape({
+  name: Yup.string().required('Name is required'),
+  email: Yup.string().email('Invalid email address').required('Email is required'),
+  // password: Yup.string().min(8, 'Password must be at least 8 characters long').required('Password is required'),
+  // confirmPassword: Yup.string()
+  //   .oneOf([Yup.ref('password')], 'Passwords must match')
+  //   .required('Confirm Password is required'),
+  // // rememberMe: Yup.boolean().oneOf([true], 'Terms and Conditions must be accepted').required('Terms and Conditions must be accepted'),
+  // gender: Yup.string().optional(),
+  // profile_image: Yup.string(),
+  // age: Yup.number().positive('Age must be a positive number').integer('Age must be an integer').optional(),
+  // major: Yup.string().optional(),
+  // subject: Yup.string().optional(),
+  // level: Yup.string().optional(),
+  // experience: Yup.string().optional(),
+  // about: Yup.string().optional(),
+  // phone_no: Yup.string()
+  //   .min(10, 'Phone number must be at least 10 digits')
+  //   .optional(),
+  // grade: Yup.string().optional(),
+  // cv: Yup.mixed().optional(),
+  // intro_video_url: Yup.string(),
+});
+
+// Default values
+export const defaultValues = {
+  name: "",
+  email: "",
+  gender: "",
+  profile_image: '',
+  password: '',
+  confirm_password: '',
+  age: "",
+  account_type: "",
+  major: "",
+  subject: "",
+  level: "",
+  experience: "",
+  about: "",
+  phone_no: "",
+  grade: "",
+  cv: '',
+  intro_video_url: '',
+};
+
 function TeacherSignupForm() {
-  const methods = useForm({
-    defaultValues: {},
+  const [postSignUp] = useSignUpMutation()
+  const methods = useForm<any>({
+    resolver: yupResolver(Schema),  // Pass Yup schema to the resolver
+    defaultValues: defaultValues,
   });
+  const searchParams = useSearchParams();
+
+  // Retrieve a specific parameter
+  const role = searchParams.get('role');
   const { handleSubmit } = methods;
   const Router = useRouter();
-  const onSubmit = () => {
-    Router.push("/dashboard");
-
+  const onSubmit = async (data: any) => {
+    console.log(data)
+    const {
+      name,
+      email,
+      gender,
+      profile_image,
+      password,
+      confirm_password,
+      age,
+      major,
+      subject,
+      level,
+      experience,
+      about,
+      phone_no,
+      grade,
+      cv,
+      intro_video_url,
+    } = data;
+  
+    try {
+      // Initialize a FormData object
+      const formData = new FormData();
+  
+      // Append fields to FormData
+      formData.append("name", name);
+      formData.append("email", email);
+      formData.append("gender", gender?.value);
+      formData.append("password", password);
+      formData.append("confirm_password", confirm_password);
+      formData.append("age", age);
+      formData.append("account_type", role as string);
+      formData.append("major", major);
+      formData.append("subject", subject);
+      formData.append("level", level?.value);
+      formData.append("experience", experience);
+      formData.append("about", about);
+      formData.append("phone_no", phone_no);
+      formData.append("grade", grade?.value || "");
+      formData.append("intro_video_url", intro_video_url || "");
+  
+      // Append file fields, checking if files are provided
+      if (profile_image) {
+        formData.append("profile_image", profile_image); // assuming profile_image is a FileList
+      }
+      if (cv) {
+        formData.append("cv", cv); // assuming cv is a FileList
+      }
+  
+      // Perform signup mutation using RTK Query
+      const response = await postSignUp(formData).unwrap();
+  
+      setLocalStorage("rememberMe", response);
+      toast.success(response?.message || "Signed up successfully!");
+  
+      if(response?.error===false)
+        {
+        Router.push("/dashboard");
+      }
+    } catch (error: any) {
+      console.error(error);
+      toast.error(error?.data?.message || "Something went wrong!");
+    }
   };
+  
   const [active, setActive] = useState(0);
   const nextStepHandler = (): void => {
     setActive(active < steps.length - 1 ? active + 1 : 0);
@@ -73,44 +191,44 @@ function TeacherSignupForm() {
           <IntroVideoForm />
         </CustomChildRenderer>
         <Box
-        display={"flex"}
-        width={"100%"}
-        justifyContent={"center"}
-        alignContent="center"
-        mt={2}
-        gap={1}
-      >
-        {active! == 0 ? null : (
-          <Button
-            variant="contained"
-            sx={{ borderRadius: 30, minWidth: 200 }}
-            onClick={previousStepHandler}
-          >
-            Back
-          </Button>
-        )}
-        {active! == 2 ? (
-          <LoadingButton
-            type="submit"
-            variant="outlined"
-            sx={{ borderRadius: 30, minWidth: 200, color: "primary.main" }}
-            endIcon={<ArrowForwardIcon />}
-          >
-            Finish
-          </LoadingButton>
-        ) : (
-          <Button
-            variant="outlined"
-            sx={{ borderRadius: 30, minWidth: 200, color: "primary.main" }}
-            endIcon={<ArrowForwardIcon />}
-            onClick={nextStepHandler}
-          >
-            Next
-          </Button>
-        )}
-      </Box>
+          display={"flex"}
+          width={"100%"}
+          justifyContent={"center"}
+          alignContent="center"
+          mt={2}
+          gap={1}
+        >
+          {active! == 0 ? null : (
+            <Button
+              variant="contained"
+              sx={{ borderRadius: 30, minWidth: 200 }}
+              onClick={previousStepHandler}
+            >
+              Back
+            </Button>
+          )}
+          {active! == 2 ? (
+            <LoadingButton
+              type="submit"
+              variant="outlined"
+              sx={{ borderRadius: 30, minWidth: 200, color: "primary.main" }}
+              endIcon={<ArrowForwardIcon />}
+            >
+              Finish
+            </LoadingButton>
+          ) : (
+            <Button
+              variant="outlined"
+              sx={{ borderRadius: 30, minWidth: 200, color: "primary.main" }}
+              endIcon={<ArrowForwardIcon />}
+              onClick={nextStepHandler}
+            >
+              Next
+            </Button>
+          )}
+        </Box>
       </FormProvider>
-    
+
       <Typography
         variant="body2"
         component="span"

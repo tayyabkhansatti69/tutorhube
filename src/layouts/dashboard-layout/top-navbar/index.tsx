@@ -33,8 +33,8 @@ function TopNavBar(props: any) {
 
   const loginUser: any = getLocalStorage('rememberMe')
 
-  // const title=NavListData.filter(nav => pathname.includes(nav.link))[0]?.label
-
+   const title=NavListData.filter(nav => pathname.includes(nav.link))[0]?.label
+console.log(title,"title")
   return (
     <Box position={{ md: "fixed", xs: "static" }} boxShadow={1} sx={Styles.mainBoxStyle(leftopen, theme)}>
       <Grid container>
@@ -45,21 +45,21 @@ function TopNavBar(props: any) {
             </IconButton>
           )}
           {
-            loginUser?.email === "teacher@gmail.com" && loginUser?.password === '123' && (
+            (loginUser?.data?.account_type === 'Teacher' || loginUser?.account_type === 'Teacher') && (
               <Typography fontSize={"25px"} color={"#343C6A"} fontWeight={600}>
                 {NavListData.filter(nav => pathname.includes(nav.link))[0]?.label}
               </Typography>
             )
           }
-        {
-            loginUser?.email === "student@gmail.com" && loginUser?.password === '123' && (
+          {
+            (loginUser?.data?.account_type === 'Student' || loginUser?.account_type === 'Student') && (
               <Typography fontSize={"25px"} color={"#343C6A"} fontWeight={600}>
                 {NavListDataStudent.filter(nav => pathname.includes(nav.link))[0]?.label}
               </Typography>
             )
           }
           {
-            loginUser?.email === "admine@gmail.com" && loginUser?.password === '123' && (
+            (loginUser?.data?.account_type === 'Admin' || loginUser?.account_type === 'Admin') && (
               <Typography fontSize={"25px"} color={"#343C6A"} fontWeight={600}>
                 {NavListDataAdmine.filter(nav => pathname.includes(nav.link))[0]?.label}
               </Typography>

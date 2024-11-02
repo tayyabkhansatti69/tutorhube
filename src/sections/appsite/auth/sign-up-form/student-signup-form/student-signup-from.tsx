@@ -9,29 +9,115 @@ import {
 import React from "react";
 import { useForm } from "react-hook-form";
 import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
-import { useRouter } from "next/navigation";
-// import {
-//   FormProvider,
-//   RHFSelect,
-//   RHFTelInput,
-//   RHFTextField,
-// } from "@/components/rhf";
-// import { RHFUploadSingleFileWithoutPreview } from "@/components/rhf/rhf-upload";
+import { useRouter, useSearchParams } from "next/navigation";
+
 import { LoadingButton } from "@mui/lab";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import { FormProvider, RHFSelect, RHFTelInput, RHFTextField } from "@/src/components/rhf";
+import { FormProvider, RHFAutocompleteSync, RHFTelInput, RHFTextField } from "@/src/components/rhf";
 import { RHFUploadSingleFileWithoutPreview } from "@/src/components/rhf/rhf-upload";
 import { StyledLink } from "@/src/components";
+import { useSignUpMutation } from "@/src/services/auth-api";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as Yup from 'yup';
+import toast from "react-hot-toast";
+import { setLocalStorage } from "@/src/utils";
+
 // import { StyledLink } from "@/components";
+export const Schema = Yup.object().shape({
+  name: Yup.string().required('Name is required'),
+  email: Yup.string().email('Invalid email address').required('Email is required'),
+  // password: Yup.string().min(8, 'Password must be at least 8 characters long').required('Password is required'),
+  // confirmPassword: Yup.string()
+  //     .oneOf([Yup.ref('password')], 'Passwords must match')
+  //     .required('Confirm Password is required'),
+  // gender: Yup.string().optional(),
+  // profile_image: Yup.string(),
+  // age: Yup.number().positive('Age must be a positive number').integer('Age must be an integer').optional(),
+  // major: Yup.string().optional(),
+  // phone_no: Yup.string()
+  //   .min(10, 'Phone number must be at least 10 digits')
+  //   .optional(),
+   grade: Yup.object(),
+
+});
+
+// Default values
+export const defaultValues = {
+  name: "",
+  email: "",
+  profile_image: '',
+  password: '',
+  confirm_password: '',
+  age: "",
+  account_type: "",
+  major: "",
+  phone_no: "",
+  grade: '',
+};
 
 function StudentSignupFrom() {
-  const methods = useForm({
-    defaultValues: {},
+  const [postSignUp] = useSignUpMutation()
+  const searchParams = useSearchParams();
+
+  // Retrieve a specific parameter
+  const role = searchParams.get('role');
+  const methods = useForm<any>({
+    resolver: yupResolver(Schema),  // Pass Yup schema to the resolver
+    defaultValues: defaultValues,
   });
   const { handleSubmit } = methods;
   const Router = useRouter();
-  const onSubmit = () => {
-    Router.push("/dashboard");
+  const onSubmit = async (data: any) => {
+   console.log(data, data?.profile_image);
+
+const {
+  name,
+  email,
+  password,
+  confirm_password,
+  age,
+  major,
+  phone_no,
+  grade,
+  profile_image,
+} = data;
+
+try {
+  // Create a FormData instance
+  const formData = new FormData();
+
+  // Append each field to FormData
+  formData.append("name", name);
+  formData.append("email", email);
+  formData.append("password", password);
+  formData.append("confirm_password", confirm_password);
+  formData.append("age", age);
+  formData.append("major", major);
+  formData.append("phone_no", phone_no);
+  formData.append("grade", grade?.value);
+  formData.append("account_type", role as string);
+
+  // Append the profile_image file if it exists
+  if (profile_image) {
+    formData.append("profile_image", profile_image);
+  }
+
+  // Perform signup mutation using RTK Query
+  const response = await postSignUp(formData).unwrap();
+
+  setLocalStorage("rememberMe", response?.data);
+  toast.success(response?.message || "Signed up successfully!");
+  if(response?.error===false)
+  {
+    Router.push("/studentDashboard");
+  }
+  
+
+} catch (error: any) {
+  console.error(error);
+  toast.error(error?.data?.message || "Something went wrong!");
+}
+
   };
   return (
     <Stack spacing={0.5} px={2}>
@@ -70,7 +156,7 @@ function StudentSignupFrom() {
             <RHFTelInput
               label="Phone *"
               fullWidth
-              name="Phone"
+              name="phone_no"
               placeholder="+xx xxxx xxxx"
             />
           </Grid>
@@ -84,11 +170,21 @@ function StudentSignupFrom() {
             />
           </Grid>
           <Grid xs={12} sm={6} p={1} item>
-            <RHFSelect
+            <RHFAutocompleteSync
+              required
               label="Grade *"
               fullWidth
-              name="Grade"
+              name="grade"
               placeholder="Select Grade"
+              options={[
+                { id: 1, name: "1", value: "1" },
+                { id: 2, name: "2", value: "2" },
+                { id: 3, name: "3", value: "3" },
+                { id: 4, name: "4", value: "4" },
+                { id: 5, name: "5", value: "5" },
+                { id: 6, name: "6", value: "6" },
+                { id: 7, name: "7", value: "7" },
+              ]}
             />
           </Grid>
           <Grid xs={12} sm={6} p={1} item>
@@ -101,7 +197,7 @@ function StudentSignupFrom() {
             />
           </Grid>
           <Grid xs={12} sm={12} p={1} item>
-            <RHFUploadSingleFileWithoutPreview label="Upload *" name="upload" />
+            <RHFUploadSingleFileWithoutPreview label="Upload *" name="profile_image"  accept=".png, .jpg," />
           </Grid>
           <Grid xs={12} sm={6} p={1} item>
             <RHFTextField
@@ -117,16 +213,16 @@ function StudentSignupFrom() {
               type="password"
               fullWidth
               label="confirm Password *"
-              name="confirmPassword"
+              name="confirm_password"
               placeholder="Enter Password Here"
             />
           </Grid>
-          <Grid xs={12} p={1}  item>
-            <Box display={"flex"} width={"100%"} gap={1} justifyContent={"center"} alignContent="center"  mt={2}>
+          <Grid xs={12} p={1} item>
+            <Box display={"flex"} width={"100%"} gap={1} justifyContent={"center"} alignContent="center" mt={2}>
               <LoadingButton
                 variant="outlined"
                 type="submit"
-                sx={{ borderRadius: 30,minWidth: 200, color: "primary.main" }}
+                sx={{ borderRadius: 30, minWidth: 200, color: "primary.main" }}
                 endIcon={<ArrowForwardIcon />}
               >
                 Finish

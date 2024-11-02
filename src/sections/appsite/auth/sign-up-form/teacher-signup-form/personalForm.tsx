@@ -1,6 +1,5 @@
-// import { RHFSelect, RHFTelInput, RHFTextField } from "@/components/rhf";
-// import { RHFUploadSingleFileWithoutPreview } from "@/components/rhf/rhf-upload";
-import { RHFSelect, RHFTelInput, RHFTextField } from "@/src/components/rhf";
+
+import { RHFAutocompleteSync,  RHFTelInput, RHFTextField } from "@/src/components/rhf";
 import { RHFUploadSingleFileWithoutPreview } from "@/src/components/rhf/rhf-upload";
 import { Grid } from "@mui/material";
 
@@ -29,18 +28,25 @@ function PersonalForm() {
         <RHFTelInput
           label="Phone *"
           fullWidth
-          name="Phone"
+          name="phone_no"
           placeholder="+xx xxxx xxxx"
         />
       </Grid>
 
       <Grid xs={12} sm={6} p={1} item>
-        <RHFSelect
-          label="Gender *"
-          fullWidth
-          name="Gender"
-          placeholder="Select Grade"
-        />
+      <RHFAutocompleteSync
+              required
+              label="Gender *"
+              fullWidth
+              name="gender"
+              placeholder="Select Grade"
+              options={[
+                { id: 1, name: "Male", value: "male" },
+                { id: 2, name: "Female", value: "female" },
+                { id: 3, name: "other", value: "other" },
+                
+              ]}
+            />
       </Grid>
       <Grid xs={12} sm={6} p={1} item>
         <RHFTextField
@@ -55,7 +61,7 @@ function PersonalForm() {
         <RHFUploadSingleFileWithoutPreview
           placeholder="Upload Photo .jpeg , .png , .jpg"
           label="Photo *"
-          name="photo"
+          name="profile_image"
         />
       </Grid>
       <Grid xs={12} sm={6} p={1} item>
@@ -72,7 +78,7 @@ function PersonalForm() {
           type="password"
           fullWidth
           label="confirm Password *"
-          name="confirmPassword"
+          name="confirm_password"
           placeholder="Enter Password Here"
         />
       </Grid>

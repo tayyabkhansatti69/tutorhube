@@ -13,34 +13,49 @@ import {
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { signInFormSchema } from "./sign-in.schema";
-import { FormProvider, RHFCheckbox, RHFTextField } from "@/src/components/rhf";
+
 import { setLocalStorage } from "@/src/utils";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+import { useLoginMutation } from "@/src/services/auth-api";
+import { FormProvider, RHFCheckbox, RHFTextField } from "@/src/components/rhf";
 
 function SignInForm() {
+  const [loginPost] = useLoginMutation();
   const router=useRouter()
   const methods = useForm({
     defaultValues: {},
     resolver: yupResolver(signInFormSchema),
   });
   const { handleSubmit } = methods;
-  const onSubmit = (data:any) => {
-    setLocalStorage('rememberMe',data)
-    if(data?.email==="teacher@gmail.com"&& data?.password==='123')
-    {
-      router.push("/dashboard");
-    }else if(data?.email==="student@gmail.com"&& data?.password==='123')
-    {
-    router.push("/studentDashboard");
-    }else if(data?.email==="admine@gmail.com"&& data?.password==='123')
-      {
-      router.push("/dashboard");
-      }else
-      {
-        null
+  const onSubmit = async (data: any) => {
+    const { email, password } = data;
+    try {
+
+      // Perform login mutation using RTK Query
+      const response = await loginPost({ email, password }).unwrap();
+    
+      toast.success(response?.message || "Sign in successfully!");
+      setLocalStorage("rememberMe", response);
+      if (response?.data?.account_type === 'Student') {
+        router.push("/studentDashboard");
+      }
+      else if (response?.data?.account_type === 'Teacher') {
+        router.push("/dashboard");
+      }
+      else if (response?.data?.account_type === 'Admin') {
+        router.push("/admindashboard");
+      }else {
+        return null
       }
 
-  };
+
+    } catch (error: any) {
+      
+      toast.error(error?.data?.message || "Something went wrong!");
+    }
+  }
+
   return (
     <Box px={4} mt={4}>
       <Stack spacing={1} direction="column" mb={1}>
